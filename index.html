@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ميزان | المنصة الرقمية للمحاماة والاستشارات القانونية الذكية</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <!-- خط Cairo العربي -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    body { font-family: 'Cairo', sans-serif; }
+    /* تخصيص الطباعة لاستخراج العقد القانوني فقط بصيغة PDF نظيفة */
+    @media print {
+      body * { visibility: hidden; }
+      #printable-contract, #printable-contract * { visibility: visible; }
+      #printable-contract {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        border: none !important;
+        box-shadow: none !important;
+        background: white !important;
+        color: black !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen selection:bg-amber-500 selection:text-slate-950">
+
+  <!-- شريط التنقل العلوي العصري -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-slate-900/95 border-b border-amber-500/20 text-white shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-black text-2xl shadow-lg shadow-amber-500/20">
+          ⚖️
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-black text-xl tracking-wide text-white">ميزان القانون</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-bold">Astrowind UI</span>
+          </div>
+          <span class="text-xs block text-slate-400">المنصة الجزائرية الذكية للمحاماة والاستشارات والعقود</span>
+        </div>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-bold">
+        <a href="#search-section" class="hover:text-amber-400 transition">البحث عن محامٍ</a>
+        <a href="#contracts-section" class="hover:text-amber-400 transition">مستخرج العقود الذكي</a>
+        <a href="#articles-section" class="hover:text-amber-400 transition">مجلة الأساتذة والمحامين</a>
+        <a href="#lawyer-portal" class="px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-400/40 text-amber-300 hover:bg-amber-500 hover:text-slate-950 transition">
+          واجهة المحامي والمكاتب
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2.5">
+        <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition" title="تبديل الوضع الليلي/النهاري">
+          🌓
+        </button>
+        <button onclick="openModal('publish-modal')" class="text-xs sm:text-sm px-4 py-2.5 rounded-xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold shadow-md transition">
+          + نشر مقال قانوني
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. قسم الواجهة الرئيسية ومحرك البحث الذكي (Hero & Smart Lawyer Finder) -->
+  <section id="search-section" class="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white pt-14 pb-28 px-4 sm:px-6 lg:px-8">
+    <!-- خلفية ضوئية تجميلية -->
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-40 -left-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold mb-5">
+          🚀 مشروع حاضنة الأعمال الجامعية | تغطية شاملة لـ 58 ولاية
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-black leading-tight mb-5">
+          ابحث عن <span class="text-transparent bg-clip-text bg-gradient-to-l from-amber-300 to-amber-500">المحامي الأقرب إليك</span> واستخرج عقودك القانونية بدقة
+        </h1>
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+          احجز استشارات قانونية مدفوعة (مرئية، مكتوبة، أو حضورية) مع نخبة المحامين المعتمدين، صِغ عقودك آلياً، واطلع على أبحاث أساتذة كليات الحقوق.
+        </p>
+      </div>
+
+      <!-- محرك البحث الزجاجي (Glassmorphic Search Engine) -->
+      <div class="bg-white/10 backdrop-blur-xl border border-white/15 p-5 sm:p-7 rounded-3xl shadow-2xl max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+          
+          <!-- الولاية + GPS -->
+          <div class="md:col-span-4">
+            <label class="block text-xs font-bold text-amber-300 mb-2">الولاية (58 ولاية) أو الموقع الجغرافي</label>
+            <div class="flex gap-2">
+              <select id="wilaya-filter" class="w-full rounded-xl bg-slate-900/95 border border-slate-700 text-white px-3.5 py-3 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none"></select>
+              <button id="geo-btn" type="button" class="px-3.5 py-3 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-300 hover:bg-amber-500 hover:text-slate-950 transition text-xs font-extrabold shrink-0">
+                📍 الأقرب لي
+              </button>
+            </div>
+          </div>
+
+          <!-- التخصص القانوني -->
+          <div class="md:col-span-4">
+            <label class="block text-xs font-bold text-amber-300 mb-2">التخصص القانوني الدقيق</label>
+            <select id="specialty-filter" class="w-full rounded-xl bg-slate-900/95 border border-slate-700 text-white px-3.5 py-3 text-sm focus:ring-2 focus:ring-amber-400 focus:outline-none">
+              <option value="all">جميع التخصصات القانونية</option>
+              <option value="القانون المدني والعقود">القانون المدني والعقود</option>
+              <option value="القانون التجاري والشركات">القانون التجاري والشركات</option>
+              <option value="قانون الأسرة والتركات">قانون الأسرة والتركات</option>
+              <option value="القانون الجزائي والجنايات">القانون الجزائي والجنايات</option>
+              <option value="القانون العقاري والمسح">القانون العقاري والمسح</option>
+              <option value="القانون الإداري والصفقات العمومية">القانون الإداري والصفقات العمومية</option>
+              <option value="قانون العمل والضمان الاجتماعي">قانون العمل والضمان الاجتماعي</option>
+              <option value="الملكية الفكرية والشركات الناشئة">الملكية الفكرية والشركات الناشئة</option>
+              <option value="التحكيم التجاري الدولي">التحكيم التجاري الدولي</option>
+            </select>
+          </div>
+
+          <!-- بحث بالكلمات المفتاحية -->
+          <div class="md:col-span-4">
+            <label class="block text-xs font-bold text-amber-300 mb-2">ابحث بالاسم أو البلدية أو موضوع القضية</label>
+            <input id="keyword-filter" type="text" placeholder="مثال: عقار، شركة ناشئة، تيارت، العاصمة..." class="w-full rounded-xl bg-slate-900/95 border border-slate-700 text-white px-4 py-3 text-sm placeholder-slate-400 focus:ring-2 focus:ring-amber-400 focus:outline-none" />
+          </div>
+        </div>
+
+        <!-- أزرار الفلترة السريعة -->
+        <div class="mt-4 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs text-slate-400 ml-1">تخصصات سريعة:</span>
+            <button onclick="setQuickSpecialty('all')" class="text-xs px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-bold transition">الكل</button>
+            <button onclick="setQuickSpecialty('القانون العقاري والمسح')" class="text-xs px-3 py-1 rounded-full bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 border border-slate-700 transition">القانون العقاري</button>
+            <button onclick="setQuickSpecialty('القانون التجاري والشركات')" class="text-xs px-3 py-1 rounded-full bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 border border-slate-700 transition">التجاري والشركات</button>
+            <button onclick="setQuickSpecialty('قانون الأسرة والتركات')" class="text-xs px-3 py-1 rounded-full bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 border border-slate-700 transition">قانون الأسرة</button>
+            <button onclick="setQuickSpecialty('القانون الجزائي والجنايات')" class="text-xs px-3 py-1 rounded-full bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-200 border border-slate-700 transition">القانون الجزائي</button>
+          </div>
+          <span id="gps-badge" class="hidden text-xs text-emerald-400 font-bold">📡 تم ترتيب النتائج حسب الأقرب لموقعك الجغرافي</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- نتائج المحامين (Lawyers Directory Grid) -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-14 relative z-20 pb-16">
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800">
+      <div>
+        <h2 class="text-lg font-extrabold text-slate-900 dark:text-white">قائمة المحامين والمكاتب المعتمدة</h2>
+        <p id="results-counter" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">يتم عرض جميع المحامين المتاحين للاستشارة الفورية</p>
+      </div>
+      <div class="flex items-center gap-2 text-xs font-bold">
+        <span class="px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+          ✔ هويات مهنية موثقة لدى الاتحاد الوطني لمنظمات المحامين
+        </span>
+      </div>
+    </div>
+
+    <div id="lawyers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- 2. مستخرج ومولد العقود القانونية الذكي (Smart Contract Generator) -->
+  <section id="contracts-section" class="py-16 bg-slate-900 text-white border-y border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-amber-400 text-xs font-bold uppercase tracking-wider">أتمتة الوثائق القانونية الذكية</span>
+          <h2 class="text-2xl sm:text-4xl font-black mt-1">مستخرج ومولد نماذج العقود القانونية</h2>
+          <p class="text-slate-400 text-sm mt-2 max-w-2xl">
+            اختر نموذج العقد، أدخل بيانات الأطراف والشروط المالية، وعاين العقد المصاغ قانونياً بشكل فوري مع إمكانية طباعته أو استخراجه بصيغة PDF.
+          </p>
+        </div>
+        <div id="contract-tabs" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- استمارة البيانات -->
+        <div class="lg:col-span-5 bg-slate-800/90 border border-slate-700 p-6 rounded-2xl shadow-xl">
+          <h3 id="contract-form-title" class="text-lg font-extrabold text-amber-400 mb-1"></h3>
+          <p id="contract-form-desc" class="text-xs text-slate-300 mb-5"></p>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">الطرف الأول (المؤسسة / المؤجر / البائع)</label>
+              <input id="input-partyOne" type="text" placeholder="مثال: شركة الابتكار الرقمي ذ.م.م" class="contract-input w-full rounded-xl bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white focus:ring-2 focus:ring-amber-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">الطرف الثاني (العامل / المستأجر / المتلقي)</label>
+              <input id="input-partyTwo" type="text" placeholder="مثال: السيد محمد أمين بن علي" class="contract-input w-full rounded-xl bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white focus:ring-2 focus:ring-amber-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1.5">موضوع التعاقد / المنصب / عنوان العقار</label>
+              <input id="input-jobTitle" type="text" placeholder="مثال: مهندس برمجيات / مكتب مهني بحي النصر" class="contract-input w-full rounded-xl bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white focus:ring-2 focus:ring-amber-400 focus:outline-none" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">القيمة المالية (د.ج)</label>
+                <input id="input-salary" type="text" placeholder="85,000 د.ج" class="contract-input w-full rounded-xl bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white focus:ring-2 focus:ring-amber-400 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1.5">المدة القانونية</label>
+                <input id="input-duration" type="text" placeholder="12 شهراً" class="contract-input w-full rounded-xl bg-slate-900 border border-slate-700 px-3.5 py-2.5 text-sm text-white focus:ring-2 focus:ring-amber-400 focus:outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-5 border-t border-slate-700 flex flex-wrap gap-3">
+            <button type="button" onclick="window.print()" class="flex-1 py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs text-center transition shadow-lg">
+              🖨️ استخراج وطباعة العقد (PDF)
+            </button>
+            <button type="button" onclick="copyContractText()" class="py-3 px-4 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition">
+              📋 نسخ الصيغة
+            </button>
+          </div>
+        </div>
+
+        <!-- المعاينة الحية للوثيقة -->
+        <div id="printable-contract" class="lg:col-span-7 bg-white text-slate-900 p-8 sm:p-10 rounded-2xl shadow-2xl border-4 border-amber-500/30 relative">
+          <div class="flex items-center justify-between border-b-2 border-slate-200 pb-4 mb-6">
+            <div>
+              <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-1 rounded">وثيقة قانونية مهيأة للطباعة</span>
+              <h4 class="font-extrabold text-lg text-slate-900 mt-1">الجمهورية الجزائرية الديمقراطية الشعبية</h4>
+            </div>
+            <div class="text-left text-xs text-slate-500">
+              <p>المرجع: #MZ-LEGAL-2026</p>
+              <p id="contract-date-label"></p>
+            </div>
+          </div>
+
+          <pre id="contract-live-preview" class="whitespace-pre-wrap font-['Cairo',sans-serif] text-sm sm:text-base leading-loose text-slate-800 bg-slate-50 p-6 rounded-xl border border-slate-200 min-h-[320px]"></pre>
+
+          <div class="mt-8 grid grid-cols-2 gap-8 pt-6 border-t border-dashed border-slate-300 text-center text-xs font-bold text-slate-700">
+            <div>إمضاء وبصمة الطرف الأول (قرئ وصودق عليه)</div>
+            <div>إمضاء وبصمة الطرف الثاني (قرئ وصودق عليه)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. مجلة نشر المقالات والأبحاث (أساتذة القانون والمحامون) -->
+  <section id="articles-section" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <span class="text-amber-600 dark:text-amber-400 text-xs font-bold">النشر الأكاديمي والاجتهاد القضائي</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
+          منصة مقالات أساتذة القانون والمحامين
+        </h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+          مقالات علمية محكمة، شروحات للنصوص التشريعية الجديدة، وتعليقات على قرارات المحكمة العليا ومجلس الدولة.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="filterArticles('all')" class="art-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950">الكل</button>
+        <button onclick="filterArticles('أستاذ تعليم عالي')" class="art-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-200 dark:bg-slate-800">🎓 أبحاث الأساتذة</button>
+        <button onclick="filterArticles('محامي معتمد')" class="art-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-200 dark:bg-slate-800">⚖️ مقالات المحامين</button>
+        <button onclick="openModal('publish-modal')" class="px-4 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-extrabold text-xs shadow">
+          ✍️ انشر مقالك الآن
+        </button>
+      </div>
+    </div>
+
+    <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- 4. واجهة المحامي والمكاتب (Lawyer & Law Firm SaaS Dashboard) -->
+  <section id="lawyer-portal" class="py-16 bg-slate-100 dark:bg-slate-900/70 border-t border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-bold">
+            الواجهة الخاصة بالمحامي ومكاتب المحاماة (B2B Portal)
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-2">
+            لوحة إدارة مكتب المحاماة والاستشارات المدفوعة
+          </h2>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-4 py-2 rounded-xl font-bold border border-emerald-500/20">
+            ● حالة المكتب: متاح لاستقبال الموكلين
+          </span>
+        </div>
+      </div>
+
+      <!-- بطاقات الإحصائيات المالية والمهنية للمكتب -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span class="text-xs text-slate-500">رصيد المحفظة من الاستشارات</span>
+          <p id="dashboard-revenue" class="text-2xl font-black text-slate-900 dark:text-white mt-1">148,500 د.ج</p>
+          <span class="text-xs text-emerald-500 font-bold">متاح للسحب عبر CCP / الحساب البنكي</span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span class="text-xs text-slate-500">طلبات الاستشارة المدفوعة</span>
+          <p id="dashboard-requests-count" class="text-2xl font-black text-amber-500 mt-1">3 طلبات نشطة</p>
+          <span class="text-xs text-slate-400">مؤكدة الدفع الإلكتروني</span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span class="text-xs text-slate-500">الأبحاث والمقالات المنشورة</span>
+          <p class="text-2xl font-black text-slate-900 dark:text-white mt-1">14 دراسة</p>
+          <span class="text-xs text-indigo-400 font-bold">+5,400 مشاهدة من موكلين</span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span class="text-xs text-slate-500">تقييم المكتب والسمعة الرقمية</span>
+          <p class="text-2xl font-black text-slate-900 dark:text-white mt-1">4.9 / 5 ⭐</p>
+          <span class="text-xs text-slate-400">موثق لدى النقابة</span>
+        </div>
+      </div>
+
+      <!-- جدول طلبات الاستشارات الواردة للمحامي -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-md">
+        <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <h3 class="font-extrabold text-base">قائمة الموكلين وطلبات الاستشارات المدفوعة الواردة</h3>
+          <span class="text-xs text-amber-500 font-bold">تحديث تلقائي مباشر</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-right text-xs sm:text-sm">
+            <thead class="bg-slate-50 dark:bg-slate-800/70 text-slate-600 dark:text-slate-300">
+              <tr>
+                <th class="p-4">الموكل / الشركة</th>
+                <th class="p-4">الولاية</th>
+                <th class="p-4">موضوع الاستشارة</th>
+                <th class="p-4">النوع</th>
+                <th class="p-4">حالة الدفع</th>
+                <th class="p-4">إجراء المحامي</th>
+              </tr>
+            </thead>
+            <tbody id="lawyer-requests-tbody" class="divide-y divide-slate-200 dark:divide-slate-800">
+              <tr>
+                <td class="p-4 font-bold">شركة الأفق للتجارة ذ.م.م</td>
+                <td class="p-4">16 - الجزائر</td>
+                <td class="p-4">مراجعة وتدقيق عقد شراكة تجارية</td>
+                <td class="p-4">استشارة مكتوبة PDF</td>
+                <td class="p-4"><span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold">مدفوع (4,000 د.ج - CIB)</span></td>
+                <td class="p-4"><button onclick="alert('تم فتح نافذة إرسال الرأي القانوني الموثق للموكل.')" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs">إرسال الرأي القانوني</button></td>
+              </tr>
+              <tr>
+                <td class="p-4 font-bold">السيد رياض بوعلام</td>
+                <td class="p-4">14 - تيارت</td>
+                <td class="p-4">تسوية عقارية وقسمة عقار موروث</td>
+                <td class="p-4">مكالمة مرئية (30 د)</td>
+                <td class="p-4"><span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold">مدفوع (2,500 د.ج - الذهبية)</span></td>
+                <td class="p-4"><button onclick="alert('جاري فتح غرفة الاتصال المرئي المشفرة مع الموكل...')" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold text-xs">🎥 بدء الجلسة</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- تذييل الصفحة (Footer) -->
+  <footer class="bg-slate-950 text-slate-400 py-10 border-t border-slate-800 text-center text-xs">
+    <p class="font-bold text-white text-sm mb-1">منصة ميزان القانونية — مشروع حاضنة الأعمال (LegalTech Startup MVP)</p>
+    <p>مبني بتقنيات AstroWind & Tailwind CSS — جميع الحقوق محفوظة © 2026</p>
+  </footer>
+
+  <!-- نافذة حجز استشارة مدفوعة (Paid Consultation Modal) -->
+  <div id="booking-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-lg text-slate-900 dark:text-white">حجز استشارة قانونية مدفوعة</h3>
+        <button onclick="closeModal('booking-modal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
+      </div>
+
+      <form id="booking-form" class="space-y-4 mt-4">
+        <div class="bg-amber-500/10 border border-amber-500/30 p-3.5 rounded-xl text-xs">
+          <p class="font-extrabold text-amber-600 dark:text-amber-400 text-sm" id="modal-lawyer-name"></p>
+          <p class="text-slate-600 dark:text-slate-300 mt-1 font-bold" id="modal-lawyer-fee"></p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold mb-1">اسم الموكل أو الشركة</label>
+            <input id="client-name" type="text" required placeholder="الاسم الكامل" class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold mb-1">نوع الاستشارة</label>
+            <select id="consultation-type" class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3 py-2 text-sm">
+              <option value="مكالمة مرئية (30 د)">مكالمة مرئية فورية (30 د)</option>
+              <option value="استشارة مكتوبة PDF">استشارة قانونية مكتوبة PDF</option>
+              <option value="موعد حضوري بالمكتب">موعد حضوري في المكتب</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold mb-1">موضوع الاستشارة ووقائع الملف</label>
+          <textarea id="consultation-topic" rows="3" required placeholder="اشرح وقائع القضية أو السؤال القانوني بدقة..." class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 p-3 text-sm"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold mb-1.5">اختر وسيلة الدفع الإلكتروني</label>
+          <div class="grid grid-cols-2 gap-3 text-xs font-bold">
+            <label class="flex items-center gap-2 p-3 rounded-xl border border-amber-500 bg-amber-500/10 cursor-pointer">
+              <input type="radio" name="payMethod" value="البطاقة الذهبية" checked />
+              <span>💳 البطاقة الذهبية (Edahabia)</span>
+            </label>
+            <label class="flex items-center gap-2 p-3 rounded-xl border border-slate-300 dark:border-slate-700 cursor-pointer">
+              <input type="radio" name="payMethod" value="بطاقة CIB" />
+              <span>🏦 بطاقة بنكية (CIB)</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-l from-amber-500 to-amber-600 text-slate-950 font-black text-sm shadow-lg">
+          تأكيد الدفع وحجز الاستشارة (تضاف فوراً للوحة المحامي)
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- نافذة نشر مقال قانوني للأساتذة والمحامين -->
+  <div id="publish-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+        <h3 class="font-extrabold text-lg">نشر مقال قانوني أو بحث أكاديمي</h3>
+        <button onclick="closeModal('publish-modal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
+      </div>
+      <form id="publish-form" class="space-y-4 mt-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <input id="pub-author" type="text" required placeholder="الاسم واللقب العلمي (مثال: د. أحمد بن علي)" class="rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" />
+          <select id="pub-role" class="rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm">
+            <option value="أستاذ تعليم عالي">أستاذ تعليم عالي (كلية الحقوق)</option>
+            <option value="محامي معتمد">محامي معتمد</option>
+          </select>
+        </div>
+        <input id="pub-inst" type="text" required placeholder="الجامعة أو المجلس القضائي (مثال: كلية الحقوق جامعة الجزائر 1)" class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" />
+        <input id="pub-title" type="text" required placeholder="عنوان المقال أو البحث القانوني" class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" />
+        <textarea id="pub-excerpt" rows="4" required placeholder="ملخص الدراسة والمحاور القانونية..." class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 p-3 text-sm"></textarea>
+        <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 text-slate-950 font-black text-sm">
+          نشر المقال فوراً في المنصة
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- السكريبت التفاعلي الشامل -->
+  <script>
+    // قائمة الـ 58 ولاية جزائرية كاملة
+    const ALGERIA_WILAYAS = [
+      "01 - أدرار", "02 - الشلف", "03 - الأغواط", "04 - أم البواقي", "05 - باتنة", "06 - بجاية", "07 - بسكرة", "08 - بشار",
+      "09 - البليدة", "10 - البويرة", "11 - تمنراست", "12 - تبسة", "13 - تلمسان", "14 - تيارت", "15 - تيزي وزو", "16 - الجزائر العاصمة",
+      "17 - الجلفة", "18 - جيجل", "19 - سطيف", "20 - سعيدة", "21 - سكيكدة", "22 - سيدي بلعباس", "23 - عنابة", "24 - قالمة",
+      "25 - قسنطينة", "26 - المدية", "27 - مستغانم", "28 - المسيلة", "29 - معسكر", "30 - ورقلة", "31 - وهران", "32 - البيض",
+      "33 - إليزي", "34 - برج بوعريريج", "35 - بومرداس", "36 - الطارف", "37 - تندوف", "38 - تيسمسيلت", "39 - الوادي", "40 - خنشلة",
+      "41 - سوق أهراس", "42 - تيبازة", "43 - ميلة", "44 - عين الدفلى", "45 - النعامة", "46 - عين تموشنت", "47 - غرداية", "48 - غليزان",
+      "49 - تيميمون", "50 - برج باجي مختار", "51 - أولاد جلال", "52 - بني عباس", "53 - عين صالح", "54 - عين قزام", "55 - تقرت",
+      "56 - جانت", "57 - المغير", "58 - المنيعة"
+    ];
+
+    // بيانات المحامين
+    const LAWYERS = [
+      {
+        name: "الأستاذ عبد القادر بن عمر",
+        grade: "محامي معتمد لدى المحكمة العليا ومجلس الدولة",
+        wilaya: "16 - الجزائر العاصمة",
+        city: "حيدرة",
+        distanceKm: 4.2,
+        specialties: ["القانون التجاري والشركات", "الملكية الفكرية والشركات الناشئة", "التحكيم التجاري الدولي"],
+        experience: 18,
+        rating: 4.9,
+        reviews: 142,
+        fee: 4000,
+        avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
+      },
+      {
+        name: "الأستاذة سارة منصوري",
+        grade: "محامية معتمدة لدى مجلس القضاء",
+        wilaya: "14 - تيارت",
+        city: "وسط المدينة",
+        distanceKm: 1.5,
+        specialties: ["القانون العقاري والمسح", "القانون المدني والعقود", "قانون الأسرة والتركات"],
+        experience: 11,
+        rating: 4.9,
+        reviews: 98,
+        fee: 2500,
+        avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+      },
+      {
+        name: "الأستاذ كريم بوزيان",
+        grade: "محامي معتمد لدى المحكمة العليا",
+        wilaya: "31 - وهران",
+        city: "بئر الجير",
+        distanceKm: 6.8,
+        specialties: ["القانون الجزائي والجنايات", "القانون الإداري والصفقات العمومية"],
+        experience: 15,
+        rating: 4.8,
+        reviews: 115,
+        fee: 3500,
+        avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80"
+      },
+      {
+        name: "الأستاذة ياسمين خوجة",
+        grade: "محامية ومستشارة قانونية للشركات",
+        wilaya: "25 - قسنطينة",
+        city: "علي منجلي",
+        distanceKm: 9.1,
+        specialties: ["قانون العمل والضمان الاجتماعي", "القانون التجاري والشركات", "الملكية الفكرية والشركات الناشئة"],
+        experience: 9,
+        rating: 4.7,
+        reviews: 76,
+        fee: 3000,
+        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
+      },
+      {
+        name: "الأستاذ مراد لعروسي",
+        grade: "محامي معتمد لدى المحكمة العليا",
+        wilaya: "19 - سطيف",
+        city: "حي الهضاب",
+        distanceKm: 12.0,
+        specialties: ["القانون العقاري والمسح", "القانون التجاري والشركات", "التحكيم التجاري الدولي"],
+        experience: 14,
+        rating: 4.9,
+        reviews: 89,
+        fee: 3500,
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
+      },
+      {
+        name: "الأستاذة مريم بن يحيى",
+        grade: "محامية معتمدة لدى المجلس القضائي",
+        wilaya: "09 - البليدة",
+        city: "بوفاريك",
+        distanceKm: 5.4,
+        specialties: ["قانون الأسرة والتركات", "القانون المدني والعقود", "قانون العمل والضمان الاجتماعي"],
+        experience: 8,
+        rating: 4.8,
+        reviews: 64,
+        fee: 2500,
+        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80"
+      }
+    ];
+
+    // نماذج العقود الذكية
+    const CONTRACTS = [
+      {
+        category: "عقد عمل (CDD)",
+        title: "عقد عمل محدد المدة وفق القانون 90-11",
+        desc: "نموذج رسمي متوافق مع تشريع العمل الجزائري يشمل المنصب، الأجر، فترة التجربة، والسر المهني.",
+        body: `عقد عمل محدد المدة (أحكام القانون 90-11)
+
+أبرم هذا العقد بين كل من:
+1. الطرف الأول (المستخدم): {{partyOne}}
+2. الطرف الثاني (العامل): {{partyTwo}}
+
+المادة 01 (موضوع العقد):
+يوظف الطرف الأول الطرف الثاني لشغل منصب: {{jobTitle}}، ويلتزم العامل بأداء مهامه وفق القوانين والنظام الداخلي للمؤسسة.
+
+المادة 02 (مدة العقد):
+حددت مدة هذا العقد بـ {{duration}}، مع إخضاع العامل لفترة تجربة قانونية.
+
+المادة 03 (الأجر والتعويضات):
+يتقاضى الطرف الثاني أجراً شهرياً صافياً قدره {{salary}}، مع التصريح لدى صندوق الضمان الاجتماعي (CNAS).
+
+المادة 04 (السر المهني):
+يلتزم الطرف الثاني بالحفاظ التام على أسرار المؤسسة وبياناتها المهنية.`
+      },
+      {
+        category: "اتفاقية سرية (NDA)",
+        title: "اتفاقية عدم إفصاح وحماية فكرة مشروع ناشئ (NDA)",
+        desc: "مخصص لحاملي المشاريع المبتكرة والشركات الناشئة لحماية البرمجيات والأسرار التجارية.",
+        body: `اتفاقية عدم إفصاح وسرية المعلومات (NDA)
+
+بين الموقعين أدناه:
+1. الطرف الأول (المفصح / صاحب المشروع): {{partyOne}}
+2. الطرف الثاني (المتلقي للمعلومات): {{partyTwo}}
+
+المادة 01 (نطاق المعلومات السرية):
+تشمل المعلومات السرية كافة البيانات والبرمجيات المتعلقة بـ: {{jobTitle}}.
+
+المادة 02 (مدة الالتزام):
+يمتنع الطرف الثاني عن إفشاء أو استغلال أي معلومة تخص المشروع لمدة {{duration}}.
+
+المادة 03 (الشرط الجزائي):
+في حال الإخلال بالتزام السرية، يلتزم الطرف المخل بدفع تعويض اتفاقي قدره {{salary}} مع الاحتفاظ بحق المتابعة القضائية.`
+      },
+      {
+        category: "عقد كراء مهني",
+        title: "عقد إيجار محل مهني / مكتب تجاري",
+        desc: "نموذج دقيق لتأجير المكاتب المهنية والمحلات التجارية محدد المدة والالتزامات.",
+        body: `عقد كراء محل مهني / تجاري
+
+بين كل من:
+1. المؤجر (المالك): {{partyOne}}
+2. المستأجر: {{partyTwo}}
+
+المادة 01 (العين المؤجرة):
+يؤجر الطرف الأول للطرف الثاني العقار المهني الكائن بـ: {{jobTitle}}.
+
+المادة 02 (المدة وبدل الإيجار):
+يسري هذا الإيجار لمدة {{duration}}، مقابل بدل إيجار قدره {{salary}}.
+
+المادة 03 (الالتزامات):
+يلتزم المستأجر باستغلال العين المؤجرة في الغرض المهني المتفق عليه والمحافظة عليها.`
+      }
+    ];
+
+    // المقالات الأكاديمية والقانونية
+    const ARTICLES = [
+      {
+        title: "الإطار القانوني للشركات الناشئة (Startups) وحوافز الوسم في التشريع الجزائري",
+        author: "أ.د. كمال آيت قاسي",
+        role: "أستاذ تعليم عالي",
+        inst: "كلية الحقوق والعلوم السياسية - جامعة الجزائر 1",
+        readTime: "7 دقائق",
+        excerpt: "دراسة تحليلية للإعفاءات الجبائية وآليات حماية الملكية الفكرية وبراءات الاختراع للمشاريع المحتضنة."
+      },
+      {
+        title: "حجية التوقيع الإلكتروني والعقود الرقمية أمام القضاء المدني والتجاري",
+        author: "الأستاذ عبد القادر بن عمر",
+        role: "محامي معتمد",
+        inst: "معتمد لدى المحكمة العليا ومجلس الدولة",
+        readTime: "5 دقائق",
+        excerpt: "شروط اعتماد التصديق الإلكتروني في إبرام العقود عن بعد وفق القانون 15-04 وإثبات المعاملات الرقمية."
+      },
+      {
+        title: "ضوابط فسخ الصفقات العمومية والتسوية الودية للمنازعات الإدارية",
+        author: "د. نسرين بلقاسم",
+        role: "أستاذ تعليم عالي",
+        inst: "كلية الحقوق - جامعة وهران 2",
+        readTime: "9 دقائق",
+        excerpt: "قراءة أكاديمية معمقة في الضمانات القانونية للمتعامل المتعاقد مع الإدارة أمام القضاء الإداري."
+      }
+    ];
+
+    // تهيئة قائمة الـ 58 ولاية
+    const wilayaSelect = document.getElementById('wilaya-filter');
+    wilayaSelect.innerHTML = `<option value="all">جميع الولايات (58 ولاية)</option>` +
+      ALGERIA_WILAYAS.map(w => `<option value="${w}">${w}</option>`).join('');
+
+    // رسم بطاقات المحامين
+    let sortByGps = false;
+    function renderLawyers() {
+      const wVal = wilayaSelect.value;
+      const sVal = document.getElementById('specialty-filter').value;
+      const kVal = document.getElementById('keyword-filter').value.trim().toLowerCase();
+
+      let filtered = LAWYERS.filter(l => {
+        const matchW = wVal === 'all' || l.wilaya === wVal;
+        const matchS = sVal === 'all' || l.specialties.includes(sVal);
+        const matchK = !kVal || l.name.toLowerCase().includes(kVal) || l.wilaya.toLowerCase().includes(kVal) || l.city.toLowerCase().includes(kVal) || l.specialties.join(' ').toLowerCase().includes(kVal);
+        return matchW && matchS && matchK;
+      });
+
+      if (sortByGps) {
+        filtered.sort((a, b) => a.distanceKm - b.distanceKm);
+      }
+
+      document.getElementById('results-counter').textContent = `تم العثور على (${filtered.length}) محامٍ معتمد متاح للاستشارة`;
+
+      const grid = document.getElementById('lawyers-grid');
+      grid.innerHTML = filtered.map(l => `
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition flex flex-col justify-between overflow-hidden">
+          <div class="p-5">
+            <div class="flex items-start gap-3.5 mb-4">
+              <img src="${l.avatar}" alt="${l.name}" class="w-16 h-16 rounded-2xl object-cover border-2 border-amber-500/40 shrink-0" />
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="font-extrabold text-base text-slate-900 dark:text-white">${l.name}</h3>
+                  <span class="text-amber-500 text-sm" title="هوية مهنية موثقة">✔</span>
+                </div>
+                <p class="text-xs text-amber-600 dark:text-amber-400 font-bold mt-0.5">${l.grade}</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">📍 ${l.wilaya} (${l.city}) • <span class="text-emerald-500 font-bold">يبعد ${l.distanceKm} كم</span></p>
+              </div>
+            </div>
+            <div class="flex items-center justify-between text-xs bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl mb-4">
+              <span>⭐ <strong>${l.rating}</strong> (${l.reviews} تقييم)</span>
+              <span>الخبرة: <strong>${l.experience} سنة</strong></span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              ${l.specialties.map(sp => `<span class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold">${sp}</span>`).join('')}
+            </div>
+          </div>
+          <div class="px-5 py-4 bg-slate-50 dark:bg-slate-800/40 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] text-slate-400 block">تسعيرة الاستشارة</span>
+              <span class="font-black text-base text-slate-900 dark:text-white">${l.fee.toLocaleString()} د.ج</span>
+            </div>
+            <button onclick="openBooking('${l.name}', ${l.fee}, '${l.wilaya}')" class="px-4 py-2.5 rounded-xl bg-gradient-to-l from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs shadow-md transition">
+              احجز استشارة مدفوعة
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    wilayaSelect.addEventListener('change', renderLawyers);
+    document.getElementById('specialty-filter').addEventListener('change', renderLawyers);
+    document.getElementById('keyword-filter').addEventListener('input', renderLawyers);
+
+    window.setQuickSpecialty = function(spec) {
+      document.getElementById('specialty-filter').value = spec;
+      renderLawyers();
+    };
+
+    document.getElementById('geo-btn').addEventListener('click', () => {
+      sortByGps = true;
+      wilayaSelect.value = 'all';
+      document.getElementById('gps-badge').classList.remove('hidden');
+      renderLawyers();
+    });
+
+    // تهيئة مولد العقود الذكي
+    let activeContractIdx = 0;
+    document.getElementById('contract-date-label').textContent = 'تاريخ التحرير: ' + new Date().toLocaleDateString('ar-DZ');
+
+    function renderContractTabs() {
+      const tabsContainer = document.getElementById('contract-tabs');
+      tabsContainer.innerHTML = CONTRACTS.map((c, idx) => `
+        <button onclick="selectContract(${idx})" class="px-4 py-2.5 rounded-xl text-xs font-extrabold transition border ${idx === activeContractIdx ? 'bg-amber-500 text-slate-950 border-amber-400' : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'}">
+          ${c.category}
+        </button>
+      `).join('');
+    }
+
+    window.selectContract = function(idx) {
+      activeContractIdx = idx;
+      renderContractTabs();
+      updateContractPreview();
+    };
+
+    function updateContractPreview() {
+      const tpl = CONTRACTS[activeContractIdx];
+      document.getElementById('contract-form-title').textContent = tpl.title;
+      document.getElementById('contract-form-desc').textContent = tpl.desc;
+
+      const p1 = document.getElementById('input-partyOne').value || '........................';
+      const p2 = document.getElementById('input-partyTwo').value || '........................';
+      const job = document.getElementById('input-jobTitle').value || '........................';
+      const sal = document.getElementById('input-salary').value || '............ د.ج';
+      const dur = document.getElementById('input-duration').value || '............';
+
+      document.getElementById('contract-live-preview').textContent = tpl.body
+        .replaceAll('{{partyOne}}', p1)
+        .replaceAll('{{partyTwo}}', p2)
+        .replaceAll('{{jobTitle}}', job)
+        .replaceAll('{{salary}}', sal)
+        .replaceAll('{{duration}}', dur);
+    }
+
+    document.querySelectorAll('.contract-input').forEach(inp => inp.addEventListener('input', updateContractPreview));
+
+    window.copyContractText = function() {
+      navigator.clipboard.writeText(document.getElementById('contract-live-preview').textContent);
+      alert('تم نسخ الصيغة القانونية للعقد بنجاح!');
+    };
+
+    // تهيئة المقالات القانونية
+    let currentArticleRole = 'all';
+    window.filterArticles = function(role) {
+      currentArticleRole = role;
+      renderArticles();
+    };
+
+    function renderArticles() {
+      const list = currentArticleRole === 'all' ? ARTICLES : ARTICLES.filter(a => a.role === currentArticleRole);
+      document.getElementById('articles-grid').innerHTML = list.map(a => `
+        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="text-xs font-extrabold px-3 py-1 rounded-full ${a.role === 'أستاذ تعليم عالي' ? 'bg-indigo-500/10 text-indigo-500 border border-indigo-500/20' : 'bg-amber-500/10 text-amber-500 border border-amber-500/20'}">
+                ${a.role === 'أستاذ تعليم عالي' ? '🎓 أستاذ جامعي' : '⚖️ محامي معتمد'}
+              </span>
+              <span class="text-xs text-slate-400">${a.readTime}</span>
+            </div>
+            <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white mb-2 leading-snug">${a.title}</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-5">${a.excerpt}</p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <p class="text-xs font-extrabold text-slate-900 dark:text-white">${a.author}</p>
+              <p class="text-[11px] text-slate-500">${a.inst}</p>
+            </div>
+            <button onclick="alert('عنوان البحث: ${a.title}\\n\\nالكاتب: ${a.author} (${a.inst})\\n\\nملخص: ${a.excerpt}')" class="text-xs font-bold text-amber-500 hover:underline">قراءة الدراسة ←</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // نوافذ الحجز والنشر والوضع الليلي
+    window.toggleTheme = function() {
+      document.documentElement.classList.toggle('dark');
+    };
+    window.openModal = function(id) {
+      document.getElementById(id).classList.remove('hidden');
+    };
+    window.closeModal = function(id) {
+      document.getElementById(id).classList.add('hidden');
+    };
+
+    let selectedLawyerInfo = { name: '', fee: 0, wilaya: '' };
+    window.openBooking = function(name, fee, wilaya) {
+      selectedLawyerInfo = { name, fee, wilaya };
+      document.getElementById('modal-lawyer-name').textContent = `المحامي: ${name} (${wilaya})`;
+      document.getElementById('modal-lawyer-fee').textContent = `أتعاب الاستشارة الموثقة: ${fee.toLocaleString()} د.ج`;
+      openModal('booking-modal');
+    };
+
+    document.getElementById('booking-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const client = document.getElementById('client-name').value;
+      const type = document.getElementById('consultation-type').value;
+      const topic = document.getElementById('consultation-topic').value;
+      const pay = document.querySelector('input[name="payMethod"]:checked').value;
+
+      // إضافة الحجز مباشرة إلى جدول لوحة تحكم المحامي
+      const tbody = document.getElementById('lawyer-requests-tbody');
+      const tr = document.createElement('tr');
+      tr.className = "bg-amber-500/5";
+      tr.innerHTML = `
+        <td class="p-4 font-bold">${client} <span class="text-[10px] bg-amber-500 text-slate-950 px-1.5 py-0.5 rounded font-black">جديد</span></td>
+        <td class="p-4">${selectedLawyerInfo.wilaya}</td>
+        <td class="p-4">${topic}</td>
+        <td class="p-4">${type}</td>
+        <td class="p-4"><span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold">مدفوع (${selectedLawyerInfo.fee.toLocaleString()} د.ج - ${pay})</span></td>
+        <td class="p-4"><button onclick="alert('تم قبول طلب الاستشارة وفتح الملف بنجاح!')" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs">قبول وبدء الجلسة</button></td>
+      `;
+      tbody.prepend(tr);
+
+      closeModal('booking-modal');
+      e.target.reset();
+      alert('تم الدفع وتأكيد حجز الاستشارة بنجاح! تم إدراج طلبك فوراً في لوحة تحكم المحامي أسفل الصفحة.');
+      document.getElementById('lawyer-portal').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('publish-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      ARTICLES.unshift({
+        title: document.getElementById('pub-title').value,
+        author: document.getElementById('pub-author').value,
+        role: document.getElementById('pub-role').value,
+        inst: document.getElementById('pub-inst').value,
+        readTime: "6 دقائق",
+        excerpt: document.getElementById('pub-excerpt').value
+      });
+      renderArticles();
+      closeModal('publish-modal');
+      e.target.reset();
+      alert('تم نشر المقال القانوني بنجاح في مجلة المنصة!');
+    });
+
+    // التشغيل الأولي
+    renderLawyers();
+    renderContractTabs();
+    updateContractPreview();
+    renderArticles();
+  </script>
+</body>
+</html>
