@@ -166,9 +166,9 @@
       <div class="text-center max-w-2xl mx-auto mb-7">
         <span class="text-amber-600 dark:text-amber-400 text-xs font-extrabold">ابدأ رحلتك مع ميزان</span>
         <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">اختر نوع حسابك</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">مساحة مخصصة لكل من يبحث عن استشارة قانونية أو يقدم خدماته المهنية.</p>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">مسارات مخصصة للموكلين والمحامين والأساتذة الباحثين.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-7xl mx-auto">
         <article class="group rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-50 to-white dark:from-amber-500/10 dark:to-slate-900 p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
           <div class="flex items-start justify-between gap-4">
             <div>
@@ -193,6 +193,19 @@
           </div>
           <button type="button" onclick="openModal('client-register-modal')" class="mt-6 w-full rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white py-3 font-extrabold transition">
             إنشاء حساب موكل <span aria-hidden="true">←</span>
+          </button>
+        </article>
+        <article class="group rounded-3xl border border-emerald-500/25 bg-gradient-to-br from-emerald-50 to-white dark:from-emerald-500/10 dark:to-slate-900 p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <span class="inline-flex w-12 h-12 items-center justify-center rounded-2xl bg-emerald-600 text-2xl text-white shadow-lg shadow-emerald-600/20">🎓</span>
+              <h3 class="text-xl font-black text-slate-900 dark:text-white mt-4">أنا أستاذ جامعي</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-7">قدّم طلب توثيق صفتك الأكاديمية لنشر الأبحاث والمقالات باسمك العلمي.</p>
+            </div>
+            <span class="text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-500/10 rounded-full px-3 py-1">يتطلب التحقق</span>
+          </div>
+          <button type="button" onclick="openModal('academic-register-modal')" class="mt-6 w-full rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white py-3 font-extrabold transition">
+            طلب توثيق أستاذ جامعي <span aria-hidden="true">←</span>
           </button>
         </article>
       </div>
@@ -311,6 +324,9 @@
         <button onclick="filterArticles('all')" class="art-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950">الكل</button>
         <button onclick="filterArticles('أستاذ تعليم عالي')" class="art-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-200 dark:bg-slate-800">🎓 أبحاث الأساتذة</button>
         <button onclick="filterArticles('محامي معتمد')" class="art-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-200 dark:bg-slate-800">⚖️ مقالات المحامين</button>
+        <button onclick="openModal('academic-register-modal')" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow transition">
+          🎓 تسجيل أستاذ جامعي
+        </button>
         <button onclick="openModal('publish-modal')" class="px-4 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-extrabold text-xs shadow">
           ✍️ انشر مقالك الآن
         </button>
@@ -474,10 +490,12 @@
         <button onclick="closeModal('publish-modal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
       </div>
       <form id="publish-form" class="space-y-4 mt-4">
+        <p class="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-6 text-slate-700 dark:text-slate-300">
+          النشر بصفة أستاذ جامعي متاح بعد توثيق الحساب. <button type="button" onclick="closeModal('publish-modal'); openModal('academic-register-modal')" class="font-extrabold text-emerald-700 dark:text-emerald-300 underline">قدّم طلب توثيق أستاذ جامعي</button>
+        </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <input id="pub-author" type="text" required placeholder="الاسم واللقب العلمي (مثال: د. أحمد بن علي)" class="rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" />
-          <select id="pub-role" class="rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm">
-            <option value="أستاذ تعليم عالي">أستاذ تعليم عالي (كلية الحقوق)</option>
+          <select id="pub-role" required class="rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm">
             <option value="محامي معتمد">محامي معتمد</option>
           </select>
         </div>
@@ -487,6 +505,56 @@
         <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 text-slate-950 font-black text-sm">
           نشر المقال فوراً في المنصة
         </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- طلب توثيق حساب أستاذ جامعي -->
+  <div id="academic-register-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="academic-register-title">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div>
+          <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">توثيق أكاديمي</span>
+          <h3 id="academic-register-title" class="font-extrabold text-lg text-slate-900 dark:text-white">التسجيل كأستاذ جامعي وطلب التحقق</h3>
+        </div>
+        <button type="button" onclick="closeModal('academic-register-modal')" aria-label="إغلاق" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
+      </div>
+      <div class="mt-4 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-6 text-slate-700 dark:text-slate-300">
+        يلزم التحقق من البريد الجامعي والصفة الأكاديمية ومراجعة إثبات رسمي قبل اعتماد الحساب. هذه النسخة التجريبية لا ترسل البيانات ولا تتحقق من الهوية؛ لا تدخل بيانات حقيقية أو ترفق وثائق هنا.
+      </div>
+      <form id="academic-register-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+        <div>
+          <label for="academic-register-name" class="block text-xs font-bold mb-1.5">الاسم الكامل كما يظهر في المنشورات</label>
+          <input id="academic-register-name" name="name" type="text" autocomplete="name" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="الاسم واللقب" />
+        </div>
+        <div>
+          <label for="academic-register-email" class="block text-xs font-bold mb-1.5">البريد الجامعي الرسمي</label>
+          <input id="academic-register-email" name="email" type="email" autocomplete="email" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="name@university.dz" />
+        </div>
+        <div>
+          <label for="academic-register-university" class="block text-xs font-bold mb-1.5">الجامعة</label>
+          <input id="academic-register-university" name="university" type="text" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="اسم الجامعة" />
+        </div>
+        <div>
+          <label for="academic-register-faculty" class="block text-xs font-bold mb-1.5">الكلية والقسم</label>
+          <input id="academic-register-faculty" name="faculty" type="text" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="كلية الحقوق، قسم ..." />
+        </div>
+        <div>
+          <label for="academic-register-rank" class="block text-xs font-bold mb-1.5">الرتبة الأكاديمية</label>
+          <select id="academic-register-rank" name="rank" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm">
+            <option value="">اختر الرتبة</option>
+            <option>أستاذ</option><option>أستاذ محاضر أ</option><option>أستاذ محاضر ب</option><option>أستاذ مساعد</option><option>رتبة أكاديمية أخرى</option>
+          </select>
+        </div>
+        <div>
+          <label for="academic-register-profile" class="block text-xs font-bold mb-1.5">رابط الملف الأكاديمي أو ORCID</label>
+          <input id="academic-register-profile" name="profile" type="url" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="https://..." />
+        </div>
+        <div class="sm:col-span-2 rounded-xl border border-slate-200 dark:border-slate-700 p-3 text-xs leading-6 text-slate-600 dark:text-slate-300">
+          الإثبات المطلوب عند تفعيل الخدمة: وثيقة مهنية جامعية أو صفحة رسمية بالجامعة. رفع الوثائق والتحقق من البريد سيُتاحان بعد ربط خادم آمن ومراجعة إدارية.
+        </div>
+        <p id="academic-register-status" class="sm:col-span-2 hidden rounded-xl p-3 text-xs leading-6" role="status" aria-live="polite"></p>
+        <button type="submit" class="sm:col-span-2 w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm transition">متابعة طلب التوثيق</button>
       </form>
     </div>
   </div>
@@ -980,10 +1048,11 @@
 
     document.getElementById('publish-form').addEventListener('submit', function(e) {
       e.preventDefault();
+      const authorRole = document.getElementById('pub-role').value;
       ARTICLES.unshift({
         title: document.getElementById('pub-title').value,
         author: document.getElementById('pub-author').value,
-        role: document.getElementById('pub-role').value,
+        role: authorRole,
         inst: document.getElementById('pub-inst').value,
         readTime: "6 دقائق",
         excerpt: document.getElementById('pub-excerpt').value
@@ -994,11 +1063,11 @@
       alert('تم نشر المقال القانوني بنجاح في مجلة المنصة!');
     });
 
-    function handleDemoRegistration(form, statusId) {
+    function handleDemoRegistration(form, statusId, message) {
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         const status = document.getElementById(statusId);
-        status.textContent = 'اكتمل التحقق من الحقول. هذه نسخة تجريبية؛ لم يتم إنشاء حساب أو إرسال بياناتك. يلزم ربط التسجيل بخادم آمن لتفعيل الحسابات.';
+        status.textContent = message;
         status.className = 'sm:col-span-2 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-6 text-slate-700 dark:text-slate-300';
         form.reset();
       });
@@ -1016,8 +1085,9 @@
 
     populateRegistrationWilayas('lawyer-register-wilaya');
     populateRegistrationWilayas('client-register-wilaya');
-    handleDemoRegistration(document.getElementById('lawyer-register-form'), 'lawyer-register-status');
-    handleDemoRegistration(document.getElementById('client-register-form'), 'client-register-status');
+    handleDemoRegistration(document.getElementById('lawyer-register-form'), 'lawyer-register-status', 'اكتمل التحقق من الحقول فقط. هذه نسخة تجريبية؛ لم يتم إنشاء حساب أو إرسال بياناتك. يلزم ربط التسجيل بخادم آمن لتفعيل الحسابات.');
+    handleDemoRegistration(document.getElementById('client-register-form'), 'client-register-status', 'اكتمل التحقق من الحقول فقط. هذه نسخة تجريبية؛ لم يتم إنشاء حساب أو إرسال بياناتك. يلزم ربط التسجيل بخادم آمن لتفعيل الحسابات.');
+    handleDemoRegistration(document.getElementById('academic-register-form'), 'academic-register-status', 'اكتمل التحقق من الحقول فقط؛ لم يتم التحقق من الهوية أو الصفة الأكاديمية، ولم تُرسل البيانات. يلزم ربط خادم آمن ومراجعة إدارية لاعتماد الحساب.');
 
     // التشغيل الأولي
     renderLawyers();
