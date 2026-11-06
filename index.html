@@ -70,6 +70,12 @@
       </nav>
 
       <div class="flex items-center gap-2.5">
+        <button onclick="openModal('client-register-modal')" class="hidden sm:inline-flex text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-white/20 text-white hover:bg-white/10 font-bold transition">
+          التسجيل كموكل
+        </button>
+        <button onclick="openModal('lawyer-register-modal')" class="hidden sm:inline-flex text-xs sm:text-sm px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold transition">
+          التسجيل كمحامٍ
+        </button>
         <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition" title="تبديل الوضع الليلي/النهاري">
           🌓
         </button>
@@ -150,6 +156,45 @@
           </div>
           <span id="gps-badge" class="hidden text-xs text-emerald-400 font-bold">📡 تم ترتيب النتائج حسب الأقرب لموقعك الجغرافي</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- التسجيل حسب نوع الحساب -->
+  <section id="registration-section" class="py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-950">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-7">
+        <span class="text-amber-600 dark:text-amber-400 text-xs font-extrabold">ابدأ رحلتك مع ميزان</span>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">اختر نوع حسابك</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">مساحة مخصصة لكل من يبحث عن استشارة قانونية أو يقدم خدماته المهنية.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+        <article class="group rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-50 to-white dark:from-amber-500/10 dark:to-slate-900 p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <span class="inline-flex w-12 h-12 items-center justify-center rounded-2xl bg-amber-500 text-2xl shadow-lg shadow-amber-500/20">⚖️</span>
+              <h3 class="text-xl font-black text-slate-900 dark:text-white mt-4">أنا محامٍ</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-7">أنشئ ملفك المهني، عرّف بتخصصاتك واستقبل طلبات الاستشارة من الموكلين.</p>
+            </div>
+            <span class="text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 rounded-full px-3 py-1">للمهنيين</span>
+          </div>
+          <button type="button" onclick="openModal('lawyer-register-modal')" class="mt-6 w-full rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 py-3 font-extrabold transition">
+            إنشاء حساب محامٍ <span aria-hidden="true">←</span>
+          </button>
+        </article>
+        <article class="group rounded-3xl border border-indigo-500/25 bg-gradient-to-br from-indigo-50 to-white dark:from-indigo-500/10 dark:to-slate-900 p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <span class="inline-flex w-12 h-12 items-center justify-center rounded-2xl bg-indigo-600 text-2xl text-white shadow-lg shadow-indigo-600/20">👤</span>
+              <h3 class="text-xl font-black text-slate-900 dark:text-white mt-4">أنا موكل</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-7">أنشئ حسابك للعثور على محامٍ مناسب، وحجز الاستشارات ومتابعة طلباتك.</p>
+            </div>
+            <span class="text-xs font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-500/10 rounded-full px-3 py-1">للأفراد والشركات</span>
+          </div>
+          <button type="button" onclick="openModal('client-register-modal')" class="mt-6 w-full rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white py-3 font-extrabold transition">
+            إنشاء حساب موكل <span aria-hidden="true">←</span>
+          </button>
+        </article>
       </div>
     </div>
   </section>
@@ -442,6 +487,105 @@
         <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 text-slate-950 font-black text-sm">
           نشر المقال فوراً في المنصة
         </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- واجهة التسجيل التجريبية للمحامي -->
+  <div id="lawyer-register-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="lawyer-register-title">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div>
+          <span class="text-xs font-bold text-amber-600 dark:text-amber-400">حساب مهني</span>
+          <h3 id="lawyer-register-title" class="font-extrabold text-lg text-slate-900 dark:text-white">التسجيل كمحامٍ</h3>
+        </div>
+        <button type="button" onclick="closeModal('lawyer-register-modal')" aria-label="إغلاق" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
+      </div>
+      <p class="mt-4 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-6 text-slate-700 dark:text-slate-300">هذه واجهة تجريبية فقط. لن يتم إنشاء حساب أو إرسال البيانات حتى ربط المنصة بخادم آمن.</p>
+      <form id="lawyer-register-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+        <div>
+          <label for="lawyer-register-name" class="block text-xs font-bold mb-1.5">الاسم واللقب</label>
+          <input id="lawyer-register-name" name="name" type="text" autocomplete="name" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="الأستاذ / الأستاذة ..." />
+        </div>
+        <div>
+          <label for="lawyer-register-email" class="block text-xs font-bold mb-1.5">البريد الإلكتروني</label>
+          <input id="lawyer-register-email" name="email" type="email" autocomplete="email" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="name@example.com" />
+        </div>
+        <div>
+          <label for="lawyer-register-phone" class="block text-xs font-bold mb-1.5">رقم الهاتف</label>
+          <input id="lawyer-register-phone" name="phone" type="tel" autocomplete="tel" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="05/06/07 ..." />
+        </div>
+        <div>
+          <label for="lawyer-register-bar-number" class="block text-xs font-bold mb-1.5">رقم الاعتماد المهني</label>
+          <input id="lawyer-register-bar-number" name="barNumber" type="text" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="رقم بطاقة المحامي" />
+        </div>
+        <div>
+          <label for="lawyer-register-wilaya" class="block text-xs font-bold mb-1.5">الولاية</label>
+          <select id="lawyer-register-wilaya" name="wilaya" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm">
+            <option value="">اختر الولاية</option>
+          </select>
+        </div>
+        <div>
+          <label for="lawyer-register-specialty" class="block text-xs font-bold mb-1.5">التخصص القانوني</label>
+          <select id="lawyer-register-specialty" name="specialty" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm">
+            <option value="">اختر تخصصك</option>
+            <option>القانون المدني والعقود</option><option>القانون التجاري والشركات</option><option>قانون الأسرة والتركات</option><option>القانون الجزائي والجنايات</option><option>القانون العقاري والمسح</option><option>تخصص آخر</option>
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="lawyer-register-password" class="block text-xs font-bold mb-1.5">كلمة المرور (8 أحرف على الأقل)</label>
+          <input id="lawyer-register-password" name="password" type="password" autocomplete="new-password" minlength="8" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="••••••••" />
+        </div>
+        <label class="sm:col-span-2 flex items-start gap-2 text-xs leading-6 text-slate-600 dark:text-slate-300">
+          <input type="checkbox" required class="mt-1 accent-amber-500" />
+          <span>أوافق على شروط استخدام منصة ميزان وأتعهد بصحة بياناتي المهنية.</span>
+        </label>
+        <p id="lawyer-register-status" class="sm:col-span-2 hidden rounded-xl p-3 text-xs leading-6" role="status" aria-live="polite"></p>
+        <button type="submit" class="sm:col-span-2 w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm transition">متابعة التسجيل المهني</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- واجهة التسجيل التجريبية للموكل -->
+  <div id="client-register-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="client-register-title">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div>
+          <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">حساب موكل</span>
+          <h3 id="client-register-title" class="font-extrabold text-lg text-slate-900 dark:text-white">التسجيل كموكل</h3>
+        </div>
+        <button type="button" onclick="closeModal('client-register-modal')" aria-label="إغلاق" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
+      </div>
+      <p class="mt-4 rounded-xl border border-indigo-500/30 bg-indigo-500/10 p-3 text-xs leading-6 text-slate-700 dark:text-slate-300">هذه واجهة تجريبية فقط. لن يتم إنشاء حساب أو إرسال البيانات حتى ربط المنصة بخادم آمن.</p>
+      <form id="client-register-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+        <div>
+          <label for="client-register-name" class="block text-xs font-bold mb-1.5">الاسم الكامل</label>
+          <input id="client-register-name" name="name" type="text" autocomplete="name" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="الاسم واللقب" />
+        </div>
+        <div>
+          <label for="client-register-email" class="block text-xs font-bold mb-1.5">البريد الإلكتروني</label>
+          <input id="client-register-email" name="email" type="email" autocomplete="email" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="name@example.com" />
+        </div>
+        <div>
+          <label for="client-register-phone" class="block text-xs font-bold mb-1.5">رقم الهاتف</label>
+          <input id="client-register-phone" name="phone" type="tel" autocomplete="tel" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="05/06/07 ..." />
+        </div>
+        <div>
+          <label for="client-register-wilaya" class="block text-xs font-bold mb-1.5">الولاية</label>
+          <select id="client-register-wilaya" name="wilaya" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm">
+            <option value="">اختر الولاية</option>
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="client-register-password" class="block text-xs font-bold mb-1.5">كلمة المرور (8 أحرف على الأقل)</label>
+          <input id="client-register-password" name="password" type="password" autocomplete="new-password" minlength="8" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-2.5 text-sm" placeholder="••••••••" />
+        </div>
+        <label class="sm:col-span-2 flex items-start gap-2 text-xs leading-6 text-slate-600 dark:text-slate-300">
+          <input type="checkbox" required class="mt-1 accent-indigo-600" />
+          <span>أوافق على شروط استخدام منصة ميزان وسياسة الخصوصية.</span>
+        </label>
+        <p id="client-register-status" class="sm:col-span-2 hidden rounded-xl p-3 text-xs leading-6" role="status" aria-live="polite"></p>
+        <button type="submit" class="sm:col-span-2 w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-sm transition">إنشاء حساب موكل</button>
       </form>
     </div>
   </div>
@@ -849,6 +993,31 @@
       e.target.reset();
       alert('تم نشر المقال القانوني بنجاح في مجلة المنصة!');
     });
+
+    function handleDemoRegistration(form, statusId) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const status = document.getElementById(statusId);
+        status.textContent = 'اكتمل التحقق من الحقول. هذه نسخة تجريبية؛ لم يتم إنشاء حساب أو إرسال بياناتك. يلزم ربط التسجيل بخادم آمن لتفعيل الحسابات.';
+        status.className = 'sm:col-span-2 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-6 text-slate-700 dark:text-slate-300';
+        form.reset();
+      });
+    }
+
+    function populateRegistrationWilayas(selectId) {
+      const select = document.getElementById(selectId);
+      ALGERIA_WILAYAS.forEach(function(wilaya) {
+        const option = document.createElement('option');
+        option.value = wilaya;
+        option.textContent = wilaya;
+        select.append(option);
+      });
+    }
+
+    populateRegistrationWilayas('lawyer-register-wilaya');
+    populateRegistrationWilayas('client-register-wilaya');
+    handleDemoRegistration(document.getElementById('lawyer-register-form'), 'lawyer-register-status');
+    handleDemoRegistration(document.getElementById('client-register-form'), 'client-register-status');
 
     // التشغيل الأولي
     renderLawyers();
