@@ -70,6 +70,9 @@
       </nav>
 
       <div class="flex items-center gap-2.5">
+        <button onclick="openModal('login-modal')" class="text-xs sm:text-sm px-3 sm:px-4 py-2.5 rounded-xl border border-white/20 text-white hover:bg-white/10 font-bold transition">
+          تسجيل الدخول
+        </button>
         <button onclick="openModal('client-register-modal')" class="hidden sm:inline-flex text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-white/20 text-white hover:bg-white/10 font-bold transition">
           التسجيل كموكل
         </button>
@@ -479,6 +482,40 @@
           تأكيد الدفع وحجز الاستشارة (تضاف فوراً للوحة المحامي)
         </button>
       </form>
+    </div>
+  </div>
+
+  <!-- واجهة تسجيل الدخول التجريبية -->
+  <div id="login-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div>
+          <span class="text-xs font-bold text-amber-600 dark:text-amber-400">مرحبًا بعودتك</span>
+          <h3 id="login-title" class="font-extrabold text-lg text-slate-900 dark:text-white">تسجيل الدخول إلى ميزان</h3>
+        </div>
+        <button type="button" onclick="closeModal('login-modal')" aria-label="إغلاق" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
+      </div>
+      <p class="mt-4 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-6 text-slate-700 dark:text-slate-300">
+        هذه واجهة تجريبية؛ تسجيل الدخول الفعلي يتطلب تفعيل نظام الحسابات الآمن.
+      </p>
+      <form id="login-form" class="space-y-4 mt-4">
+        <div>
+          <label for="login-email" class="block text-xs font-bold mb-1.5">البريد الإلكتروني</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-3 text-sm" placeholder="name@example.com" />
+        </div>
+        <div>
+          <label for="login-password" class="block text-xs font-bold mb-1.5">كلمة المرور</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" required class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3.5 py-3 text-sm" placeholder="أدخل كلمة المرور" />
+        </div>
+        <p id="login-status" class="hidden rounded-xl p-3 text-xs leading-6" role="status" aria-live="polite"></p>
+        <button type="submit" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm transition">دخول</button>
+      </form>
+      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-600 dark:text-slate-300">
+        ليس لديك حساب؟
+        <button type="button" onclick="closeModal('login-modal'); openModal('client-register-modal')" class="font-extrabold text-indigo-600 dark:text-indigo-400 hover:underline">سجّل كموكل</button>
+        <span class="mx-1">أو</span>
+        <button type="button" onclick="closeModal('login-modal'); openModal('lawyer-register-modal')" class="font-extrabold text-amber-600 dark:text-amber-400 hover:underline">كمحامٍ</button>
+      </div>
     </div>
   </div>
 
@@ -1088,6 +1125,7 @@
     handleDemoRegistration(document.getElementById('lawyer-register-form'), 'lawyer-register-status', 'اكتمل التحقق من الحقول فقط. هذه نسخة تجريبية؛ لم يتم إنشاء حساب أو إرسال بياناتك. يلزم ربط التسجيل بخادم آمن لتفعيل الحسابات.');
     handleDemoRegistration(document.getElementById('client-register-form'), 'client-register-status', 'اكتمل التحقق من الحقول فقط. هذه نسخة تجريبية؛ لم يتم إنشاء حساب أو إرسال بياناتك. يلزم ربط التسجيل بخادم آمن لتفعيل الحسابات.');
     handleDemoRegistration(document.getElementById('academic-register-form'), 'academic-register-status', 'اكتمل التحقق من الحقول فقط؛ لم يتم التحقق من الهوية أو الصفة الأكاديمية، ولم تُرسل البيانات. يلزم ربط خادم آمن ومراجعة إدارية لاعتماد الحساب.');
+    handleDemoRegistration(document.getElementById('login-form'), 'login-status', 'تم التحقق من تنسيق الحقول فقط؛ لم يتم تسجيل الدخول. يلزم ربط نظام حسابات آمن لتفعيل هذه الميزة.');
 
     // التشغيل الأولي
     renderLawyers();
