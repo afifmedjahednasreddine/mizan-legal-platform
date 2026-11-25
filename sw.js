@@ -1,9 +1,10 @@
 /* Avocat DZ — عامل خدمة بسيط: تخزين مؤقت للأصول الثابتة (Cache-first) */
-const CACHE = 'avocat-dz-v2';
+const CACHE = 'avocat-dz-v3';
 const ASSETS = [
   './',
   './index.html',
   './privacy.html',
+  './register.html',
   './css/styles.css',
   './js/data.js',
   './js/app.js',

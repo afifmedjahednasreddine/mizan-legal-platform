@@ -75,6 +75,8 @@ const I18N = {
     'sort.experience': 'Plus expérimentés',
     'sort.distance': 'Plus proches',
     'filter.favorites': 'Favoris',
+    'lawyers.join': '⚖️ Rejoindre comme avocat',
+    'footer.register': 'Inscription avocat',
     'contracts.kicker': 'Outils pratiques',
     'contracts.title': 'Des modèles remplis et imprimés en minutes',
     'contracts.sub': 'Choisissez un modèle, remplissez les champs, prévisualisez en direct puis imprimez en PDF.',

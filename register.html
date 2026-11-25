@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>التسجيل كمحامٍ | Avocat DZ</title>
+  <meta name="description" content="سجّل كمحامٍ في منصة Avocat DZ وانضم إلى الدليل الموثّق — نسخة تجريبية MVP." />
+  <meta name="theme-color" content="#0e1a2b" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" dir="ltr" aria-hidden="true">AD</span>
+        <span>
+          <span class="brand-name" dir="ltr">Avocat DZ</span>
+          <span class="brand-tag">منصة المحاماة الجزائرية</span>
+        </span>
+        <span class="mvp-badge">نسخة تجريبية MVP</span>
+      </a>
+      <a href="index.html" class="btn btn-outline">→ العودة إلى المنصة</a>
+    </div>
+  </header>
+
+  <main id="main" class="section">
+    <div class="container" style="max-width:760px">
+      <span class="kicker">انضم إلى الدليل الموثّق</span>
+      <h1 class="section-title">التسجيل كمحامٍ</h1>
+      <p class="section-sub">أنشئ ملفك المهني ليظهر في دليل المحامين بعد مراجعة الاعتماد، وابدأ باستقبال طلبات الاستشارة.</p>
+
+      <div class="form-note" style="margin-top:1.4rem" role="note">
+        ⚠️ نموذج تجريبي: يُحفظ طلبك في متصفحك فقط ولا يُرسل إلى أي خادم. التحقق الفعلي من الاعتماد المهني يتطلب النسخة المرتبطة بخادم آمن.
+      </div>
+
+      <form id="lawyer-register-form" class="vs-card solution" style="margin-top:1.4rem" novalidate>
+        <div style="display:grid;gap:1rem">
+          <div class="field">
+            <label for="reg-name">الاسم واللقب *</label>
+            <input id="reg-name" type="text" required autocomplete="name" placeholder="الأستاذ / الأستاذة …" />
+          </div>
+          <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr" class="reg-two">
+            <div class="field">
+              <label for="reg-email">البريد الإلكتروني *</label>
+              <input id="reg-email" type="email" required autocomplete="email" placeholder="name@example.dz" dir="ltr" style="text-align:end" />
+            </div>
+            <div class="field">
+              <label for="reg-phone">رقم الهاتف *</label>
+              <input id="reg-phone" type="tel" required autocomplete="tel" placeholder="05 / 06 / 07 …" dir="ltr" style="text-align:end" />
+            </div>
+          </div>
+          <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr" class="reg-two">
+            <div class="field">
+              <label for="reg-wilaya">الولاية *</label>
+              <select id="reg-wilaya" required></select>
+            </div>
+            <div class="field">
+              <label for="reg-bar">رقم الاعتماد المهني *</label>
+              <input id="reg-bar" type="text" required placeholder="رقم بطاقة المحامي" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="reg-specialty">التخصص الرئيسي *</label>
+            <select id="reg-specialty" required>
+              <option value="">اختر تخصصك</option>
+              <option>القانون المدني والعقود</option>
+              <option>القانون التجاري والشركات</option>
+              <option>قانون الأسرة والتركات</option>
+              <option>القانون الجزائي والجنايات</option>
+              <option>القانون العقاري والمسح</option>
+              <option>القانون الإداري والصفقات العمومية</option>
+              <option>قانون العمل والضمان الاجتماعي</option>
+              <option>الملكية الفكرية والشركات الناشئة</option>
+              <option>التحكيم التجاري الدولي</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="reg-experience">سنوات الخبرة *</label>
+            <input id="reg-experience" type="number" min="0" max="60" required placeholder="مثال: 8" />
+          </div>
+          <div class="field">
+            <label for="reg-bio">نبذة مهنية قصيرة</label>
+            <textarea id="reg-bio" rows="3" placeholder="خبراتك، القضايا النموذجية، اللغات…"></textarea>
+          </div>
+          <label style="display:flex;gap:.6rem;align-items:flex-start;font-size:.8rem;color:var(--ink-soft)">
+            <input type="checkbox" required style="margin-top:.25rem" />
+            <span>أتعهد بصحة بياناتي المهنية، وأوافق على مراجعة الاعتماد قبل الظهور في الدليل الموثّق.</span>
+          </label>
+          <p id="register-status" class="form-status" hidden role="status" aria-live="polite"></p>
+          <button type="submit" class="btn btn-gold" style="width:100%">إرسال طلب التسجيل</button>
+        </div>
+      </form>
+
+      <!-- الطلبات المحفوظة محلياً -->
+      <section id="my-requests" class="dash-table-wrap" style="margin-top:1.6rem" hidden>
+        <header>
+          <h3 style="font-size:.92rem">طلبات التسجيل المحفوظة في هذا المتصفح</h3>
+        </header>
+        <div class="dash-table-scroll">
+          <table class="dash-table">
+            <thead><tr><th>الاسم</th><th>الولاية</th><th>التخصص</th><th>الحالة</th></tr></thead>
+            <tbody id="my-requests-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container copyright"><span dir="ltr">Avocat DZ</span> © 2026 — نسخة تجريبية MVP</div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script>
+    // صفحة التسجيل كمحامٍ: تعبئة الولايات + حفظ الطلب محلياً
+    const { ALGERIA_WILAYAS } = window.AVOCAT_DATA;
+    const KEY = 'avocat-lawyer-registrations';
+    const get = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
+
+    document.getElementById('reg-wilaya').innerHTML =
+      '<option value="">اختر الولاية</option>' +
+      ALGERIA_WILAYAS.map(w => `<option>${w}</option>`).join('');
+
+    function renderMyRequests() {
+      const list = get();
+      const section = document.getElementById('my-requests');
+      section.hidden = list.length === 0;
+      document.getElementById('my-requests-tbody').innerHTML = list.map(r => `
+        <tr>
+          <td><strong>${r.name}</strong></td>
+          <td>${r.wilaya}</td>
+          <td>${r.specialty}</td>
+          <td><span class="status-select" data-status="قيد المراجعة" style="display:inline-block">قيد المراجعة</span></td>
+        </tr>`).join('');
+    }
+
+    document.getElementById('lawyer-register-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const list = get();
+      list.unshift({
+        name: document.getElementById('reg-name').value.trim(),
+        email: document.getElementById('reg-email').value.trim(),
+        phone: document.getElementById('reg-phone').value.trim(),
+        wilaya: document.getElementById('reg-wilaya').value,
+        bar: document.getElementById('reg-bar').value.trim(),
+        specialty: document.getElementById('reg-specialty').value,
+        experience: document.getElementById('reg-experience').value,
+        bio: document.getElementById('reg-bio').value.trim(),
+        at: new Date().toISOString(),
+      });
+      try { localStorage.setItem(KEY, JSON.stringify(list)); } catch { /* وضع خاص */ }
+      const status = document.getElementById('register-status');
+      status.hidden = false;
+      status.textContent = '✅ سُجّل طلبك محلياً. في النسخة النهائية سيخضع ملفك لمراجعة الاعتماد قبل الظهور في الدليل.';
+      form.reset();
+      renderMyRequests();
+      setTimeout(() => { status.hidden = true; }, 5000);
+    });
+
+    renderMyRequests();
+  </script>
+</body>
+</html>
