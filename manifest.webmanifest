@@ -1,0 +1,20 @@
+{
+  "name": "Avocat DZ — منصة المحاماة الجزائرية",
+  "short_name": "Avocat DZ",
+  "description": "اعثر على محامٍ موثّق في ولايتك وولّد نماذجك القانونية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e1a2b",
+  "theme_color": "#0e1a2b",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
