@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ميزان | المنصة الرقمية للمحاماة والاستشارات القانونية الذكية</title>
+  <title>Avocat DZ | المنصة الجزائرية للمحاماة والاستشارات القانونية</title>
+  <meta name="description" content="Avocat DZ: اعثر على محامٍ حسب الولاية والتخصص، استكشف نماذج قانونية ومقالات متخصصة، واحجز استشارتك بسهولة." />
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -174,6 +175,17 @@
       --mizan-serif: 'Noto Naskh Arabic', serif;
       --mizan-sans: 'IBM Plex Sans Arabic', sans-serif;
     }
+    html.dark {
+      color-scheme: dark;
+      --mizan-ink: #e7ece8;
+      --mizan-ink-soft: #d0d8d3;
+      --mizan-paper: #10191e;
+      --mizan-white: #18242a;
+      --mizan-copper: #d3a77c;
+      --mizan-copper-light: #e1bd99;
+      --mizan-muted: #a7b2ad;
+      --mizan-line: #35434a;
+    }
 
     html { scroll-padding-top: 6rem; scroll-behavior: smooth; }
     body, body.bg-slate-50 {
@@ -190,6 +202,10 @@
       border-color: rgba(23, 42, 50, .12);
       box-shadow: 0 5px 25px rgba(23, 42, 50, .04);
     }
+    html.dark .site-header { background: rgba(16, 25, 30, .94); }
+    html.dark #search-section, html.dark #contracts-section { background: #0c171c; }
+    html.dark #lawyer-portal { background: #121d22; }
+    html.dark .site-footer { background: #0c171c; }
     .site-header > div { max-width: 1360px; }
     .brand-mark {
       width: 44px;
@@ -219,7 +235,33 @@
       color: var(--mizan-white) !important;
       border-radius: 3px !important;
     }
-    #theme-toggle { display: none; }
+    #theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      min-height: 40px;
+      color: var(--mizan-ink);
+      border-color: var(--mizan-line);
+      background: transparent;
+    }
+    .directory-tools { color: var(--mizan-ink-soft); }
+    .directory-tools select, .articles-search {
+      min-height: 42px;
+      border: 1px solid var(--mizan-line);
+      border-radius: 2px;
+      padding: .55rem .8rem;
+      background: var(--mizan-white);
+      color: var(--mizan-ink);
+    }
+    .favorite-toggle {
+      color: var(--mizan-copper);
+      background: #f6f0e9;
+      border: 1px solid var(--mizan-line);
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .favorite-toggle[aria-pressed="true"] { color: #fff; background: #9c463f; border-color: #9c463f; }
     #search-section {
       overflow: hidden;
       padding: 5.2rem 1.5rem 5.4rem;
@@ -487,13 +529,13 @@
   <header class="site-header sticky top-0 z-40 backdrop-blur-xl border-b text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="brand-mark flex items-center justify-center font-bold text-xl" aria-hidden="true">
-          م
+        <div class="brand-mark flex items-center justify-center font-bold text-xl" aria-hidden="true" dir="ltr">
+          AD
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="brand-name font-black text-xl">ميزان</span>
-            <span class="brand-kicker text-[10px] px-2 py-0.5 border font-bold">منصة العدالة الرقمية</span>
+            <span class="brand-name font-black text-xl" dir="ltr">Avocat DZ</span>
+            <span class="brand-kicker text-[10px] px-2 py-0.5 border font-bold">منصة المحاماة الجزائرية</span>
           </div>
           <span class="brand-caption text-xs block">خبرة قانونية أقرب إليك</span>
         </div>
@@ -507,8 +549,8 @@
       </nav>
 
       <div class="flex items-center gap-2.5">
-        <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition" title="تبديل الوضع الليلي/النهاري">
-          🌓
+        <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition" title="تبديل الوضع الليلي/النهاري" aria-label="تبديل الوضع الليلي أو النهاري" aria-pressed="false">
+          🌙
         </button>
         <button onclick="openModal('login-modal')" class="nav-login text-xs sm:text-sm px-3 sm:px-4 py-2.5 border text-white hover:bg-white/10 font-bold transition">
           دخول
@@ -540,7 +582,7 @@
         </div>
         <div class="hero-art">
           <svg viewBox="0 0 500 700" role="img" aria-labelledby="court-art-title" xmlns="http://www.w3.org/2000/svg">
-            <title id="court-art-title">رسم معماري للمحكمة يرمز إلى ميزان القانون</title>
+            <title id="court-art-title">رسم معماري للمحكمة يرمز إلى العدالة في الجزائر</title>
             <defs>
               <linearGradient id="court-bg" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="#42545a" />
@@ -574,10 +616,10 @@
             <path d="M250 112V152M230 132H270" stroke="#d3a77c" stroke-width="2" opacity=".8" />
             <circle cx="250" cy="132" r="25" fill="none" stroke="#d3a77c" stroke-opacity=".7" />
             <path d="M40 620H460" stroke="#fff" stroke-opacity=".15" />
-            <text x="250" y="654" text-anchor="middle" fill="#e7d4be" font-family="serif" font-size="15" letter-spacing="3">MIZAN · ALGERIA</text>
+            <text x="250" y="654" text-anchor="middle" fill="#e7d4be" font-family="serif" font-size="15" letter-spacing="3">AVOCAT DZ · ALGERIA</text>
           </svg>
           <div class="hero-art-caption">
-            <span>ميزان · القانون للجميع</span>
+            <span>AVOCAT DZ · القانون للجميع</span>
             <strong>خبرة تضعها في المكان الصحيح</strong>
           </div>
         </div>
@@ -651,6 +693,19 @@
       </div>
     </div>
 
+    <div class="directory-tools flex flex-wrap items-center justify-between gap-3 mb-5">
+      <button id="favorites-filter" type="button" aria-pressed="false" class="favorite-toggle px-4 py-2.5 text-xs font-bold transition">
+        ♡ المحامون المفضلون <span id="favorite-count">0</span>
+      </button>
+      <label class="flex items-center gap-2 text-xs font-bold">
+        ترتيب النتائج
+        <select id="lawyer-sort" aria-label="ترتيب نتائج المحامين">
+          <option value="recommended">الأفضل تقييماً</option>
+          <option value="experience">الأكثر خبرة</option>
+          <option value="distance">الأقرب حسب الدليل</option>
+        </select>
+      </label>
+    </div>
     <div id="lawyers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
@@ -658,7 +713,7 @@
   <section id="registration-section" class="px-4 sm:px-6 lg:px-8">
     <div class="section-heading text-center">
       <span class="section-kicker">مساحة لكل دور</span>
-      <h2 class="section-title mt-2">انضم إلى مجتمع ميزان</h2>
+      <h2 class="section-title mt-2">انضم إلى مجتمع Avocat DZ</h2>
       <p class="section-subtitle text-sm mt-2">سواء كنت تبحث عن المشورة أو تصنع المعرفة القانونية، ابدأ من هنا.</p>
     </div>
     <div class="registration-grid grid grid-cols-1 md:grid-cols-3 gap-5 mx-auto">
@@ -767,7 +822,7 @@
               <h4 class="font-extrabold text-lg text-slate-900 mt-1">الجمهورية الجزائرية الديمقراطية الشعبية</h4>
             </div>
             <div class="text-left text-xs text-slate-500">
-              <p>المرجع: #MZ-LEGAL-2026</p>
+              <p>المرجع: #ADZ-LEGAL-2026</p>
               <p id="contract-date-label"></p>
             </div>
           </div>
@@ -796,6 +851,7 @@
         </p>
       </div>
       <div class="flex flex-wrap items-center gap-2">
+        <input id="articles-search" type="search" class="articles-search text-xs" placeholder="ابحث في المقالات والأبحاث..." aria-label="البحث في المقالات والأبحاث" />
         <button onclick="filterArticles('all')" class="art-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950">الكل</button>
         <button onclick="filterArticles('أستاذ تعليم عالي')" class="art-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-200 dark:bg-slate-800">🎓 أبحاث الأساتذة</button>
         <button onclick="filterArticles('محامي معتمد')" class="art-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-200 dark:bg-slate-800">⚖️ مقالات المحامين</button>
@@ -820,7 +876,7 @@
             الواجهة الخاصة بالمحامي ومكاتب المحاماة (B2B Portal)
           </span>
           <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-2">
-            لوحة إدارة مكتب المحاماة والاستشارات المدفوعة
+            لوحة إدارة مكتب المحاماة وطلبات الاستشارة
           </h2>
         </div>
         <div class="flex items-center gap-3">
@@ -830,17 +886,17 @@
         </div>
       </div>
 
-      <!-- بطاقات الإحصائيات المالية والمهنية للمكتب -->
+      <!-- بطاقات الإحصائيات المهنية للمكتب -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span class="text-xs text-slate-500">رصيد المحفظة من الاستشارات</span>
-          <p id="dashboard-revenue" class="text-2xl font-black text-slate-900 dark:text-white mt-1">148,500 د.ج</p>
-          <span class="text-xs text-emerald-500 font-bold">متاح للسحب عبر CCP / الحساب البنكي</span>
+          <span class="text-xs text-slate-500">ملفات قيد المتابعة</span>
+          <p class="text-2xl font-black text-slate-900 dark:text-white mt-1">12 ملفاً</p>
+          <span class="text-xs text-emerald-500 font-bold">إدارة منظمة لملفات الموكلين</span>
         </div>
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span class="text-xs text-slate-500">طلبات الاستشارة المدفوعة</span>
+          <span class="text-xs text-slate-500">طلبات الاستشارة</span>
           <p id="dashboard-requests-count" class="text-2xl font-black text-amber-500 mt-1">3 طلبات نشطة</p>
-          <span class="text-xs text-slate-400">مؤكدة الدفع الإلكتروني</span>
+          <span class="text-xs text-slate-400">تنسيق المواعيد ومتابعتها</span>
         </div>
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <span class="text-xs text-slate-500">الأبحاث والمقالات المنشورة</span>
@@ -857,7 +913,7 @@
       <!-- جدول طلبات الاستشارات الواردة للمحامي -->
       <div class="dashboard-table bg-white rounded-2xl border overflow-hidden shadow-md">
         <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <h3 class="font-extrabold text-base">قائمة الموكلين وطلبات الاستشارات المدفوعة الواردة</h3>
+          <h3 class="font-extrabold text-base">قائمة الموكلين وطلبات الاستشارات الواردة</h3>
           <span class="text-xs text-amber-500 font-bold">تحديث تلقائي مباشر</span>
         </div>
         <div class="overflow-x-auto">
@@ -868,7 +924,7 @@
                 <th class="p-4">الولاية</th>
                 <th class="p-4">موضوع الاستشارة</th>
                 <th class="p-4">النوع</th>
-                <th class="p-4">حالة الدفع</th>
+                <th class="p-4">حالة الطلب</th>
                 <th class="p-4">إجراء المحامي</th>
               </tr>
             </thead>
@@ -878,7 +934,7 @@
                 <td class="p-4">16 - الجزائر</td>
                 <td class="p-4">مراجعة وتدقيق عقد شراكة تجارية</td>
                 <td class="p-4">استشارة مكتوبة PDF</td>
-                <td class="p-4"><span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold">مدفوع (4,000 د.ج - CIB)</span></td>
+                <td class="p-4"><span class="px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 text-xs font-bold">بانتظار المراجعة</span></td>
                 <td class="p-4"><button onclick="alert('تم فتح نافذة إرسال الرأي القانوني الموثق للموكل.')" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs">إرسال الرأي القانوني</button></td>
               </tr>
               <tr>
@@ -886,7 +942,7 @@
                 <td class="p-4">14 - تيارت</td>
                 <td class="p-4">تسوية عقارية وقسمة عقار موروث</td>
                 <td class="p-4">مكالمة مرئية (30 د)</td>
-                <td class="p-4"><span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold">مدفوع (2,500 د.ج - الذهبية)</span></td>
+                <td class="p-4"><span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold">موعد مؤكد</span></td>
                 <td class="p-4"><button onclick="alert('جاري فتح غرفة الاتصال المرئي المشفرة مع الموكل...')" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-bold text-xs">🎥 بدء الجلسة</button></td>
               </tr>
             </tbody>
@@ -898,22 +954,22 @@
 
   <!-- تذييل الصفحة (Footer) -->
   <footer class="site-footer text-slate-400 py-10 border-t text-center text-xs">
-    <p class="font-bold text-white text-sm mb-1">ميزان — منصة قانونية جزائرية</p>
+    <p class="font-bold text-white text-sm mb-1">Avocat DZ — منصة قانونية جزائرية</p>
     <p>المعرفة القانونية والخبرة المهنية، أقرب إليك © 2026</p>
   </footer>
 
-  <!-- نافذة حجز استشارة مدفوعة (Paid Consultation Modal) -->
+  <!-- نافذة طلب استشارة -->
   <div id="booking-modal" class="mizan-modal hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
       <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
-        <h3 class="font-extrabold text-lg text-slate-900 dark:text-white">حجز استشارة قانونية مدفوعة</h3>
+        <h3 class="font-extrabold text-lg text-slate-900 dark:text-white">طلب استشارة قانونية</h3>
         <button onclick="closeModal('booking-modal')" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
       </div>
 
       <form id="booking-form" class="space-y-4 mt-4">
         <div class="bg-amber-500/10 border border-amber-500/30 p-3.5 rounded-xl text-xs">
           <p class="font-extrabold text-amber-600 dark:text-amber-400 text-sm" id="modal-lawyer-name"></p>
-          <p class="text-slate-600 dark:text-slate-300 mt-1 font-bold" id="modal-lawyer-fee"></p>
+          <p class="text-slate-600 dark:text-slate-300 mt-1">أرسل تفاصيل طلبك للتواصل مع المحامي وتنسيق موعد مناسب.</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -936,22 +992,8 @@
           <textarea id="consultation-topic" rows="3" required placeholder="اشرح وقائع القضية أو السؤال القانوني بدقة..." class="w-full rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 p-3 text-sm"></textarea>
         </div>
 
-        <div>
-          <label class="block text-xs font-bold mb-1.5">اختر وسيلة الدفع الإلكتروني</label>
-          <div class="grid grid-cols-2 gap-3 text-xs font-bold">
-            <label class="flex items-center gap-2 p-3 rounded-xl border border-amber-500 bg-amber-500/10 cursor-pointer">
-              <input type="radio" name="payMethod" value="البطاقة الذهبية" checked />
-              <span>💳 البطاقة الذهبية (Edahabia)</span>
-            </label>
-            <label class="flex items-center gap-2 p-3 rounded-xl border border-slate-300 dark:border-slate-700 cursor-pointer">
-              <input type="radio" name="payMethod" value="بطاقة CIB" />
-              <span>🏦 بطاقة بنكية (CIB)</span>
-            </label>
-          </div>
-        </div>
-
         <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-l from-amber-500 to-amber-600 text-slate-950 font-black text-sm shadow-lg">
-          تأكيد الدفع وحجز الاستشارة (تضاف فوراً للوحة المحامي)
+          إرسال طلب الاستشارة
         </button>
       </form>
     </div>
@@ -963,7 +1005,7 @@
       <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>
           <span class="text-xs font-bold text-amber-600 dark:text-amber-400">مرحبًا بعودتك</span>
-          <h3 id="login-title" class="font-extrabold text-lg text-slate-900 dark:text-white">تسجيل الدخول إلى ميزان</h3>
+          <h3 id="login-title" class="font-extrabold text-lg text-slate-900 dark:text-white">تسجيل الدخول إلى Avocat DZ</h3>
         </div>
         <button type="button" onclick="closeModal('login-modal')" aria-label="إغلاق" class="text-slate-400 hover:text-slate-600 text-xl font-bold">✕</button>
       </div>
@@ -1115,7 +1157,7 @@
         </div>
         <label class="sm:col-span-2 flex items-start gap-2 text-xs leading-6 text-slate-600 dark:text-slate-300">
           <input type="checkbox" required class="mt-1 accent-amber-500" />
-          <span>أوافق على شروط استخدام منصة ميزان وأتعهد بصحة بياناتي المهنية.</span>
+          <span>أوافق على شروط استخدام منصة Avocat DZ وأتعهد بصحة بياناتي المهنية.</span>
         </label>
         <p id="lawyer-register-status" class="sm:col-span-2 hidden rounded-xl p-3 text-xs leading-6" role="status" aria-live="polite"></p>
         <button type="submit" class="sm:col-span-2 w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm transition">متابعة التسجيل المهني</button>
@@ -1159,7 +1201,7 @@
         </div>
         <label class="sm:col-span-2 flex items-start gap-2 text-xs leading-6 text-slate-600 dark:text-slate-300">
           <input type="checkbox" required class="mt-1 accent-indigo-600" />
-          <span>أوافق على شروط استخدام منصة ميزان وسياسة الخصوصية.</span>
+          <span>أوافق على شروط استخدام منصة Avocat DZ وسياسة الخصوصية.</span>
         </label>
         <p id="client-register-status" class="sm:col-span-2 hidden rounded-xl p-3 text-xs leading-6" role="status" aria-live="polite"></p>
         <button type="submit" class="sm:col-span-2 w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-black text-sm transition">إنشاء حساب موكل</button>
@@ -1193,7 +1235,6 @@
         experience: 18,
         rating: 4.9,
         reviews: 142,
-        fee: 4000,
         avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
       },
       {
@@ -1206,7 +1247,6 @@
         experience: 11,
         rating: 4.9,
         reviews: 98,
-        fee: 2500,
         avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
       },
       {
@@ -1219,7 +1259,6 @@
         experience: 15,
         rating: 4.8,
         reviews: 115,
-        fee: 3500,
         avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80"
       },
       {
@@ -1232,7 +1271,6 @@
         experience: 9,
         rating: 4.7,
         reviews: 76,
-        fee: 3000,
         avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
       },
       {
@@ -1245,7 +1283,7 @@
         experience: 14,
         rating: 4.9,
         reviews: 89,
-        fee: 3500,
+
         avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
       },
       {
@@ -1258,7 +1296,6 @@
         experience: 8,
         rating: 4.8,
         reviews: 64,
-        fee: 2500,
         avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80"
       }
     ];
@@ -1361,32 +1398,73 @@
       ALGERIA_WILAYAS.map(w => `<option value="${w}">${w}</option>`).join('');
 
     // رسم بطاقات المحامين
+    const FAVORITES_STORAGE_KEY = 'avocat-dz-favorite-lawyers';
+    let favoriteLawyers = new Set();
+    let showFavoriteLawyers = false;
     let sortByGps = false;
+    try {
+      const savedFavorites = JSON.parse(localStorage.getItem(FAVORITES_STORAGE_KEY) || '[]');
+      if (Array.isArray(savedFavorites)) {
+        favoriteLawyers = new Set(savedFavorites.filter(name => LAWYERS.some(lawyer => lawyer.name === name)));
+      }
+    } catch (error) {
+      console.warn('تعذر تحميل قائمة المحامين المفضلين من هذا المتصفح.', error);
+    }
+
+    function updateFavoriteCount() {
+      document.getElementById('favorite-count').textContent = favoriteLawyers.size;
+    }
+
+    window.toggleFavorite = function(name) {
+      if (favoriteLawyers.has(name)) {
+        favoriteLawyers.delete(name);
+      } else {
+        favoriteLawyers.add(name);
+      }
+      try {
+        localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify([...favoriteLawyers]));
+      } catch (error) {
+        console.warn('تعذر حفظ قائمة المحامين المفضلين في هذا المتصفح.', error);
+      }
+      updateFavoriteCount();
+      renderLawyers();
+    };
+
     function renderLawyers() {
       const wVal = wilayaSelect.value;
       const sVal = document.getElementById('specialty-filter').value;
       const kVal = document.getElementById('keyword-filter').value.trim().toLowerCase();
+      const sortValue = document.getElementById('lawyer-sort').value;
 
       let filtered = LAWYERS.filter(l => {
         const matchW = wVal === 'all' || l.wilaya === wVal;
         const matchS = sVal === 'all' || l.specialties.includes(sVal);
         const matchK = !kVal || l.name.toLowerCase().includes(kVal) || l.wilaya.toLowerCase().includes(kVal) || l.city.toLowerCase().includes(kVal) || l.specialties.join(' ').toLowerCase().includes(kVal);
-        return matchW && matchS && matchK;
+        const matchFavorite = !showFavoriteLawyers || favoriteLawyers.has(l.name);
+        return matchW && matchS && matchK && matchFavorite;
       });
 
-      if (sortByGps) {
+      if (sortByGps || sortValue === 'distance') {
         filtered.sort((a, b) => a.distanceKm - b.distanceKm);
+      } else if (sortValue === 'experience') {
+        filtered.sort((a, b) => b.experience - a.experience);
+      } else {
+        filtered.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
       }
 
       document.getElementById('results-counter').textContent = `تم العثور على (${filtered.length}) محامٍ معتمد متاح للاستشارة`;
 
       const grid = document.getElementById('lawyers-grid');
+      if (filtered.length === 0) {
+        grid.innerHTML = '<p class="col-span-full rounded-xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500">لا توجد نتائج مطابقة. جرّب تغيير البحث أو أزل تصفية المفضلة.</p>';
+        return;
+      }
       grid.innerHTML = filtered.map(l => `
         <div class="lawyer-card bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition flex flex-col justify-between overflow-hidden">
           <div class="p-5">
             <div class="flex items-start gap-3.5 mb-4">
               <div class="lawyer-avatar" aria-hidden="true">${l.name.replace(/^الأستاذة?\s*/, '').split(' ').slice(0, 2).map(part => part.charAt(0)).join('')}</div>
-              <div>
+              <div class="min-w-0 flex-1">
                 <div class="flex items-center gap-1.5">
                   <h3 class="font-extrabold text-base text-slate-900 dark:text-white">${l.name}</h3>
                   <span class="text-amber-500 text-sm" title="هوية مهنية موثقة">✔</span>
@@ -1394,6 +1472,9 @@
                 <p class="text-xs text-amber-600 dark:text-amber-400 font-bold mt-0.5">${l.grade}</p>
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">📍 ${l.wilaya} (${l.city}) • <span class="text-emerald-500 font-bold">يبعد ${l.distanceKm} كم</span></p>
               </div>
+              <button type="button" class="favorite-toggle px-2.5 py-2 text-xs font-bold transition" aria-pressed="${favoriteLawyers.has(l.name)}" aria-label="${favoriteLawyers.has(l.name) ? 'إزالة من' : 'إضافة إلى'} المحامين المفضلين" onclick="toggleFavorite('${l.name}')">
+                ${favoriteLawyers.has(l.name) ? '♥ محفوظ' : '♡ حفظ'}
+              </button>
             </div>
             <div class="lawyer-meta flex items-center justify-between text-xs px-3 py-2 mb-4">
               <span>⭐ <strong>${l.rating}</strong> (${l.reviews} تقييم)</span>
@@ -1403,13 +1484,9 @@
               ${l.specialties.map(sp => `<span class="lawyer-tag text-[11px] px-2.5 py-1 font-semibold">${sp}</span>`).join('')}
             </div>
           </div>
-          <div class="lawyer-footer px-5 py-4 border-t flex items-center justify-between">
-            <div>
-              <span class="text-[11px] text-slate-400 block">تسعيرة الاستشارة</span>
-              <span class="font-black text-base text-slate-900 dark:text-white">${l.fee.toLocaleString()} د.ج</span>
-            </div>
-            <button onclick="openBooking('${l.name}', ${l.fee}, '${l.wilaya}')" class="lawyer-book px-4 py-2.5 font-bold text-xs transition">
-              احجز استشارة مدفوعة
+          <div class="lawyer-footer px-5 py-4 border-t flex items-center justify-end">
+            <button onclick="openBooking('${l.name}', '${l.wilaya}')" class="lawyer-book px-4 py-2.5 font-bold text-xs transition">
+              اطلب استشارة
             </button>
           </div>
         </div>
@@ -1419,6 +1496,16 @@
     wilayaSelect.addEventListener('change', renderLawyers);
     document.getElementById('specialty-filter').addEventListener('change', renderLawyers);
     document.getElementById('keyword-filter').addEventListener('input', renderLawyers);
+    document.getElementById('lawyer-sort').addEventListener('change', () => {
+      sortByGps = false;
+      renderLawyers();
+    });
+    document.getElementById('favorites-filter').addEventListener('click', event => {
+      showFavoriteLawyers = !showFavoriteLawyers;
+      event.currentTarget.setAttribute('aria-pressed', showFavoriteLawyers);
+      event.currentTarget.innerHTML = `${showFavoriteLawyers ? '♥ عرض الكل' : '♡ المحامون المفضلون'} <span id="favorite-count">${favoriteLawyers.size}</span>`;
+      renderLawyers();
+    });
 
     window.setQuickSpecialty = function(spec) {
       document.getElementById('specialty-filter').value = spec;
@@ -1430,6 +1517,7 @@
 
     document.getElementById('geo-btn').addEventListener('click', () => {
       sortByGps = true;
+      document.getElementById('lawyer-sort').value = 'distance';
       wilayaSelect.value = 'all';
       document.getElementById('gps-badge').classList.remove('hidden');
       renderLawyers();
@@ -1482,13 +1570,23 @@
 
     // تهيئة المقالات القانونية
     let currentArticleRole = 'all';
+    const articlesSearch = document.getElementById('articles-search');
     window.filterArticles = function(role) {
       currentArticleRole = role;
       renderArticles();
     };
 
     function renderArticles() {
-      const list = currentArticleRole === 'all' ? ARTICLES : ARTICLES.filter(a => a.role === currentArticleRole);
+      const query = articlesSearch.value.trim().toLowerCase();
+      const list = ARTICLES.filter(article => {
+        const matchesRole = currentArticleRole === 'all' || article.role === currentArticleRole;
+        const searchableText = `${article.title} ${article.excerpt} ${article.author} ${article.inst}`.toLowerCase();
+        return matchesRole && (!query || searchableText.includes(query));
+      });
+      if (list.length === 0) {
+        document.getElementById('articles-grid').innerHTML = '<p class="col-span-full rounded-xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500">لم نعثر على مقالات مطابقة. جرّب كلمات بحث أخرى.</p>';
+        return;
+      }
       document.getElementById('articles-grid').innerHTML = list.map(a => `
         <article class="article-card bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-lg transition flex flex-col justify-between">
           <div>
@@ -1511,11 +1609,35 @@
         </article>
       `).join('');
     }
+    articlesSearch.addEventListener('input', renderArticles);
 
     // نوافذ الحجز والنشر والوضع الليلي
     window.toggleTheme = function() {
-      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.toggle('dark');
+      document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      const themeButton = document.getElementById('theme-toggle');
+      themeButton.textContent = isDark ? '☀️' : '🌙';
+      themeButton.setAttribute('aria-pressed', isDark);
+      themeButton.title = isDark ? 'التبديل إلى الوضع النهاري' : 'التبديل إلى الوضع الليلي';
+      try {
+        localStorage.setItem('avocat-dz-theme', isDark ? 'dark' : 'light');
+      } catch (error) {
+        console.warn('تعذر حفظ إعداد المظهر في هذا المتصفح.', error);
+      }
     };
+    let savedTheme = 'light';
+    try {
+      savedTheme = localStorage.getItem('avocat-dz-theme') || 'light';
+    } catch (error) {
+      console.warn('تعذر تحميل إعداد المظهر من هذا المتصفح.', error);
+    }
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.style.colorScheme = 'dark';
+      document.getElementById('theme-toggle').textContent = '☀️';
+      document.getElementById('theme-toggle').setAttribute('aria-pressed', 'true');
+      document.getElementById('theme-toggle').title = 'التبديل إلى الوضع النهاري';
+    }
     window.openModal = function(id) {
       document.getElementById(id).classList.remove('hidden');
     };
@@ -1523,11 +1645,10 @@
       document.getElementById(id).classList.add('hidden');
     };
 
-    let selectedLawyerInfo = { name: '', fee: 0, wilaya: '' };
-    window.openBooking = function(name, fee, wilaya) {
-      selectedLawyerInfo = { name, fee, wilaya };
+    let selectedLawyerInfo = { name: '', wilaya: '' };
+    window.openBooking = function(name, wilaya) {
+      selectedLawyerInfo = { name, wilaya };
       document.getElementById('modal-lawyer-name').textContent = `المحامي: ${name} (${wilaya})`;
-      document.getElementById('modal-lawyer-fee').textContent = `أتعاب الاستشارة الموثقة: ${fee.toLocaleString()} د.ج`;
       openModal('booking-modal');
     };
 
@@ -1536,9 +1657,8 @@
       const client = document.getElementById('client-name').value;
       const type = document.getElementById('consultation-type').value;
       const topic = document.getElementById('consultation-topic').value;
-      const pay = document.querySelector('input[name="payMethod"]:checked').value;
 
-      // إضافة الحجز مباشرة إلى جدول لوحة تحكم المحامي
+      // إضافة طلب الاستشارة إلى جدول لوحة تحكم المحامي
       const tbody = document.getElementById('lawyer-requests-tbody');
       const tr = document.createElement('tr');
       tr.className = "bg-amber-500/5";
@@ -1547,14 +1667,14 @@
         <td class="p-4">${selectedLawyerInfo.wilaya}</td>
         <td class="p-4">${topic}</td>
         <td class="p-4">${type}</td>
-        <td class="p-4"><span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold">مدفوع (${selectedLawyerInfo.fee.toLocaleString()} د.ج - ${pay})</span></td>
-        <td class="p-4"><button onclick="alert('تم قبول طلب الاستشارة وفتح الملف بنجاح!')" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs">قبول وبدء الجلسة</button></td>
+        <td class="p-4"><span class="px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 text-xs font-bold">طلب جديد</span></td>
+        <td class="p-4"><button onclick="alert('تم فتح طلب الاستشارة للتنسيق مع الموكل.')" class="px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold text-xs">مراجعة الطلب</button></td>
       `;
       tbody.prepend(tr);
 
       closeModal('booking-modal');
       e.target.reset();
-      alert('تم الدفع وتأكيد حجز الاستشارة بنجاح! تم إدراج طلبك فوراً في لوحة تحكم المحامي أسفل الصفحة.');
+      alert('تم تسجيل طلبك في هذه النسخة التجريبية وإضافته إلى لوحة المحامي. يلزم ربط خادم آمن لإرسال الطلبات فعلياً.');
       document.getElementById('lawyer-portal').scrollIntoView({ behavior: 'smooth' });
     });
 
@@ -1603,6 +1723,7 @@
     handleDemoRegistration(document.getElementById('login-form'), 'login-status', 'تم التحقق من تنسيق الحقول فقط؛ لم يتم تسجيل الدخول. يلزم ربط نظام حسابات آمن لتفعيل هذه الميزة.');
 
     // التشغيل الأولي
+    updateFavoriteCount();
     renderLawyers();
     renderContractTabs();
     updateContractPreview();
